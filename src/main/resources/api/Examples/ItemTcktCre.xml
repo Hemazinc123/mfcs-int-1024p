@@ -1,0 +1,16 @@
+<ItemTcktDesc
+	xmlns="http://www.oracle.com/retail/integration/base/bo/ItemTcktDesc/v1"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.oracle.com/retail/integration/base/bo/ItemTcktDesc/v1 http://www.oracle.com/retail/integration/base/bo/ItemTcktDesc/v1/ItemTcktDesc.xsd ">
+	<item>rJuIJBstapLNLjLpGLBByæ±</item>
+	<ticket_type_id>æ±</ticket_type_id>
+	<ticket_type_desc>FXRlWgLANMXNCwrjmKGiONyYCqIrOcKPqsknUVnIcXyApzqnPaoFVghxIbEGQWnlIFJqbiKDFuwCQJdNVqEwOoZydIfdHDRusdrIKnceWmSwuUakzpcJæ±</ticket_type_desc>
+	<sel_ind>a</sel_ind>
+	<po_print_type>a</po_print_type>
+	<print_on_pc_ind>a</print_on_pc_ind>
+	<ticket_over_pct>12.4</ticket_over_pct>
+	<TicketTypeDtl>
+		<ticket_item_id>æ±</ticket_item_id>
+		<ticket_item_id_desc>guRKlJaOEXHABJMzpqerGiXDsHuNwgyMHmtxDyKVCOPYxoBAWAsFVfCmcMbCqEPqzEesaOXaktkyjtKInQdYzBeAmasIFPMqGRbYrzZEqNxUziYBPcOyHCGUboljGYtZqUEmnNUzcOPpvOsSbBAhoxLOAMZbHrXrpxTXMetWgiqTaYLbPTrelRTfkjdmghFPywkJZNsXxUKtCVwBzDtUlKxQpoWWaRSFRKgnEfOzFxEXoYRQiBNgJVæ±</ticket_item_id_desc>
+		<uda_id>5</uda_id>
+	</TicketTypeDtl>
+</ItemTcktDesc>

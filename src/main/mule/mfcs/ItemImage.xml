@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:file="http://www.mulesoft.org/schema/mule/file" xmlns:json="http://www.mulesoft.org/schema/mule/json"
+	xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns:module-eventlogger="http://www.mulesoft.org/schema/mule/module-eventlogger" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/module-eventlogger http://www.mulesoft.org/schema/mule/module-eventlogger/current/mule-module-eventlogger.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd
+http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd">
+	<flow name="sf-ItemImageCre" doc:id="5e2724ae-2ef5-430f-b81e-94a4d065368a" >
+		<module-eventlogger:logger doc:name="START:Logger" doc:id="ff00f880-93e0-4c5e-a5fb-695da3d787cf" config-ref="EventLogger_Config" message="START:Logging event at sf-ItemImageCre" apiFlowName="sf-ItemImageCre"/>
+		<ee:transform doc:name="DW:XML TO JSON" doc:id="b6afb849-edb0-4033-9be6-9e9f4e9061de" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+ns ns1 http://www.oracle.com/retail/integration/base/bo/ItemImageDesc/v1
+---
+{
+    ItemImageDesc:{
+        item:payload.ItemImageDesc.item,
+        image_name:payload.ItemImageDesc.image_name,
+        image_addr:payload.ItemImageDesc.image_addr,
+        image_type:payload.ItemImageDesc.image_type,
+        primary_ind:payload.ns1#ItemImageDesc.ns1#primary_ind,
+        display_priority:payload.ns1#ItemImageDesc.ns1#display_priority as Number,
+        image_desc:payload.ns1#ItemImageDesc.ns1#image_desc
+    }
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<json:validate-schema doc:name="Validate schema" doc:id="919aabd0-f38d-4efb-a387-cf114a28d417" schema="jsonschemas/ItemImageDesc.schema.json"/>
+		<module-eventlogger:logger doc:name="DEBUG:Logger" doc:id="9dba518b-c13a-4739-9d50-351e34d79fd3" config-ref="EventLogger_Config" message="DEBUG:Logging event at sf-ItemImageCre" apiFlowName="sf-ItemImageCre" />
+		<file:write doc:name="ItemImageCreWrite" doc:id="096a4213-06fa-4bd5-b6de-d300f15ed63c" config-ref="File_Config" path="#[vars.vRequest ++ &quot;-&quot; ++ (now() as String {format:'dd-MM-yy'}) ++ '.json']"/>
+		<module-eventlogger:logger doc:name="END:Logger" doc:id="0d1e6021-2f1c-4147-825b-fb9649f48ac0" config-ref="EventLogger_Config" message="END:Logging event at sf-ItemImageCre" apiFlowName="sf-ItemImageCre" />
+	</flow>
+	<flow name="sf-ItemImageMod" doc:id="2bb0799f-9c8a-44c6-abd6-560e011472b7" >
+		<module-eventlogger:logger doc:name="start:Logger" doc:id="d0ed8bed-7110-445b-888b-d677da58b392" message="START:Logging event at sf-ItemImageMod" apiFlowName="sf-ItemImageMod"/>
+		<ee:transform doc:name="DW: XML TO JSON" doc:id="cb07e014-4313-46bd-80ef-8906201ac857" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+ns ns1 http://www.oracle.com/retail/integration/base/bo/ItemImageDesc/v1
+---
+{
+    ItemImageDesc:{
+        item:payload.ItemImageDesc.item,
+        image_name:payload.ItemImageDesc.image_name,
+        image_addr:payload.ItemImageDesc.image_addr,
+        image_type:payload.ItemImageDesc.image_type,
+        primary_ind:payload.ns1#ItemImageDesc.ns1#primary_ind,
+        display_priority:payload.ns1#ItemImageDesc.ns1#display_priority as Number,
+        image_desc:payload.ns1#ItemImageDesc.ns1#image_desc
+    }
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<json:validate-schema doc:name="Validate schema" doc:id="7fe4906c-e302-4b50-adbe-87bb99892fd2" schema="jsonschemas/ItemImageDesc.schema.json"/>
+		<module-eventlogger:logger doc:name="DEBUG:Logger" doc:id="59b9c48b-bd3d-4bc8-b78d-713441005ada" message="DEBUG:Logging event at sf-ItemImageMod" apiFlowName="sf-ItemImageMod" />
+		<file:write doc:name="ItemImageModWrite" doc:id="d2c6014d-b191-405a-83e1-68e8383a9f23" config-ref="File_Config" path="#[vars.vRequest ++ &quot;-&quot; ++ (now() as String {format:'dd-MM-yy'}) ++ '.json']" />
+		<module-eventlogger:logger doc:name="END:Logger" doc:id="b86140e9-a708-4104-ae32-68f2fa15a590" message="END:Logging event at sf-ItemImageMod" apiFlowName="sf-ItemImageMod" severity="TRACE"/>
+	</flow>
+	<flow name="sf-ItemImageDel" doc:id="bb4cb289-9ea5-424b-aa80-2de480bac287" >
+		<module-eventlogger:logger doc:name="Start:Logger" doc:id="d985736a-8f83-4a73-9dd5-c8dba602ecad" message="START:Logging event atsf-ItemImageDel" apiFlowName="sf-ItemImageDel" config-ref="EventLogger_Config" severity="WARN"/>
+		<ee:transform doc:name="DW: XML TO JSON" doc:id="3931207e-0816-4203-b193-7c0125537f71" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+    ItemImageRef:{
+        item:payload.ItemImageRef.item,
+        image_name:payload.ItemImageRef.image_name
+    }
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<module-eventlogger:logger doc:name="Debug:Logger" doc:id="1ef28990-10a3-4d51-b101-58b4c9cc391f" config-ref="EventLogger_Config" message="START:Logging event atsf-ItemImageDel" apiFlowName="sf-ItemImageDel" severity="WARN" />
+		<json:validate-schema doc:name="Validate schema" doc:id="19434eed-018d-4dd6-8301-5a0f92b77bde" schema="jsonschemas/ItemImageRef.schema.json"/>
+		<module-eventlogger:logger doc:name="Debug:Logger" doc:id="dad5237d-dcbd-46a5-8a84-c5904158a570" config-ref="EventLogger_Config" message="START:Logging event atsf-ItemImageDel" apiFlowName="sf-ItemImageDel" severity="WARN" />
+		<file:write doc:name="ItemImageDel Write" doc:id="15eb74e4-533d-4be5-b736-c48316e848fc" config-ref="File_Config" path="#[vars.vRequest ++ &quot;-&quot; ++ (now() as String {format:'dd-MM-yy'}) ++ '.json']"/>
+		<module-eventlogger:logger doc:name="END:Logger" doc:id="52d737ad-26e7-4166-b827-44022584db87" config-ref="EventLogger_Config" message="END:Logging event atsf-ItemImageDel" apiFlowName="sf-ItemImageDel" severity="WARN" />
+	</flow>
+</mule>

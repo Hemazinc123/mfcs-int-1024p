@@ -1,0 +1,277 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"additionalProperties": false,
+	"definitions": {
+		".CustFlexAttriVo": {
+			"additionalProperties": false,
+			"description": "This object is used to communicate customer flexible attributes defined for various entities\n               using RMS's CFAS (Customer Flexiable Attribute) structure.",
+			"properties": {
+				"name": {
+					"$ref": "#/definitions/varchar230",
+					"description": "Holds the attribute name."
+				},
+				"value": {
+					"$ref": "#/definitions/varchar2250",
+					"description": "Holds the numeric or string value of the attribute."
+				},
+				"value_date": {
+					"$ref": "#/definitions/xs:dateTime",
+					"description": "Holds the date value of the attribute."
+				}
+			},
+			"required": [
+				"name"
+			],
+			"type": "object"
+		},
+		".ItemSupCtyDesc": {
+			"additionalProperties": false,
+			"description": "Description is not available.",
+			"properties": {
+				"CustFlexAttriVo": {
+					"items": {
+						"$ref": "#/definitions/.CustFlexAttriVo"
+					},
+					"type": "array"
+				},
+				"base_cost": {
+					"$ref": "#/definitions/number20_4",
+					"description": "This field will hold the tax exclusive cost of the item."
+				},
+				"calculation_basis": {
+					"$ref": "#/definitions/varchar21",
+					"description": "This indicates if the cost for the consignment/concession item will be managed either based on cost per unit or as a percentage of retail. Valid values are C - Cost per Unit, P - Purchase Rate."
+				},
+				"cost_uom": {
+					"$ref": "#/definitions/varchar24",
+					"description": "A cost UOM is held to allow costs to be managed in a separate UOM to the standard UOM."
+				},
+				"default_uop": {
+					"$ref": "#/definitions/varchar26",
+					"description": "Contains the default unit of purchase for the item/supplier/country. Valid values include 'C'ase and 'P'allet."
+				},
+				"extended_base_cost": {
+					"$ref": "#/definitions/number20_4",
+					"description": "This will hold the extended base cost for the primary delivery country of the item. Once a location is associated with the item, the primary locations extended base cost will be stored in this field. Extended base cost is the cost inclusive of all the taxes that affect the WAC. In case of GTAX , Extended Base Cost = Base Cost + Non-recoverable taxes. In case of VAT, Extended Base Cost = Base Cost."
+				},
+				"hi": {
+					"$ref": "#/definitions/number12_4",
+					"description": "Number of tiers that make up a complete pallet. Multiply TI x HI to get total number of units (cases) in a Pallet."
+				},
+				"inclusive_cost": {
+					"$ref": "#/definitions/number20_4",
+					"description": "This will hold the inclusive cost for the primary delivery country of the item. Once a location is associated with the item, the primary locations inclusive cost will be stored in this field. This cost will have both the recoverable and non recoverable taxes included. In case of GTAX , Inclusive Cost = Base Cost + Non-recoverable taxes + Recoverable Taxes. In case of VAT, Inclusive Cost = Base Cost + VAT."
+				},
+				"inner_pack_size": {
+					"$ref": "#/definitions/number12_4",
+					"description": "This field contains the break pack size for this item from the supplier."
+				},
+				"item": {
+					"$ref": "#/definitions/varchar225",
+					"description": "Unique identifier for the item."
+				},
+				"lead_time": {
+					"$ref": "#/definitions/number4",
+					"description": "This field contains the number of days that will elapse between the date an order is written and the delivery to the store or warehouse from the supplier."
+				},
+				"max_order_qty": {
+					"$ref": "#/definitions/number12_4",
+					"description": "This field contains the maximum quantity that can be ordered at one from the supplier for the item."
+				},
+				"max_tolerance": {
+					"$ref": "#/definitions/number12_4",
+					"description": "The maximum tolerance value for the catch weight simple pack."
+				},
+				"min_order_qty": {
+					"$ref": "#/definitions/number12_4",
+					"description": "This field contains the minimum quantity that can be ordered at one from the supplier for the item."
+				},
+				"min_tolerance": {
+					"$ref": "#/definitions/number12_4",
+					"description": "The minimum tolerance value for a catch weight simple pack."
+				},
+				"negotiated_item_cost": {
+					"$ref": "#/definitions/number20_4",
+					"description": "This will hold the supplier negotiated item cost for the primary delivery country of the item. Once a location is associated with the item, the primary locations negotiated item cost will be stored in this field."
+				},
+				"origin_country_id": {
+					"$ref": "#/definitions/varchar23",
+					"description": "The country where the item was manufactured or significantly altered."
+				},
+				"packing_method": {
+					"$ref": "#/definitions/varchar26",
+					"description": "This field indicates whether the packing method for the item in the container is flat or hanging."
+				},
+				"pickup_lead_time": {
+					"$ref": "#/definitions/number4",
+					"description": "Contains the time that will be taken to get the item from the supplier to the initial receiving location."
+				},
+				"primary_country_ind": {
+					"$ref": "#/definitions/varchar21",
+					"description": "This field indicates whether this country is the primary country for the item/supplier. Each item/supplier combination can have one and only one primary country."
+				},
+				"primary_supp_ind": {
+					"$ref": "#/definitions/varchar23",
+					"description": "This field indicates whether this supplier is the primary supplier for the item. Each item can have one and only one primary supplier."
+				},
+				"purchase_rate": {
+					"$ref": "#/definitions/number12_4",
+					"description": "This column contains the percentage of the retail price which will determnie the cost paid to the supplier for a consignment or concession item."
+				},
+				"purchase_type": {
+					"$ref": "#/definitions/varchar21",
+					"description": "This contains a code to indicate whether the item is normal merchandise (i.e. owned by the retailer), consignment stock or a concession item. Valid values are 0 - Owned, 1 - Consignment, 2 - Concession."
+				},
+				"round_lvl": {
+					"$ref": "#/definitions/varchar26",
+					"description": "This column is used to determine how order quantities will be rounded to case, layer and pallet."
+				},
+				"round_to_case_pct": {
+					"$ref": "#/definitions/number12_4",
+					"description": "This column will hold the Case Rounding Threshold value. During rounding, this value is used to determine whether to round partial Case quantities up or down. If the Case-fraction in question is less than the Threshold proportion, it is rounded down; if not, it is rounded up."
+				},
+				"round_to_inner_pct": {
+					"$ref": "#/definitions/number12_4",
+					"description": "This column will hold the Inner Rounding Threshold value. During rounding, this value is used to determine whether to round partial Inner quantities up or down. If the Inner-fraction in question is less than the Threshold proportion, it is rounded down; if not, it is rounded up."
+				},
+				"round_to_layer_pct": {
+					"$ref": "#/definitions/number12_4",
+					"description": "This column will hold the Layer Rounding Threshold value. During rounding, this value is used to determine whether to round partial Layer quantities up or down. If the Layer-fraction in question is less than the Threshold proportion, it is rounded down; if not, it is rounded up."
+				},
+				"round_to_pallet_pct": {
+					"$ref": "#/definitions/number12_4",
+					"description": "This column will hold the Pallet Rounding Threshold value. During rounding, this value is used to determine whether to round partial Pallet quantities up or down. If the Pallet -fraction in question is less than the Threshold proportion, it is rounded down; if not, it is rounded up."
+				},
+				"supp_hier_lvl_1": {
+					"$ref": "#/definitions/varchar210",
+					"description": "Highest level of supplier hierarchy which is there to indicate a partner, such as a manufacturer, in the supply chain that gives rebates to the retailer."
+				},
+				"supp_hier_lvl_2": {
+					"$ref": "#/definitions/varchar210",
+					"description": "Second highest level of supplier hierarchy which is there to indicate a partner, such as a distributor in the supply chain that gives rebates to the retailer."
+				},
+				"supp_hier_lvl_3": {
+					"$ref": "#/definitions/varchar210",
+					"description": "Third highest level of supplier hierarchy which is uder to indicate a partner, such as a wholesaler in the supply chain that gives rebates to the retailer."
+				},
+				"supp_hier_type_1": {
+					"$ref": "#/definitions/varchar26",
+					"description": "This field identifies partner type of supplier hierarchy level 1.This field will always have the partner type S1 which indicates manufacturer.."
+				},
+				"supp_hier_type_2": {
+					"$ref": "#/definitions/varchar26",
+					"description": "This field identifies partner type of supplier hierarchy level 2 . This field will always have the partner type S2 which indicates distributor."
+				},
+				"supp_hier_type_3": {
+					"$ref": "#/definitions/varchar26",
+					"description": "This field identifies partner type of supplier hierarchy level 3.This field will always have the partner type S3 which indicates wholesaler."
+				},
+				"supp_pack_size": {
+					"$ref": "#/definitions/number12_4",
+					"description": "This field contains the quantity that orders must be placed in multiples of for the supplier for the item."
+				},
+				"supplier": {
+					"$ref": "#/definitions/varchar210",
+					"description": "Unique identifier for the supplier."
+				},
+				"ti": {
+					"$ref": "#/definitions/number12_4",
+					"description": "Number of shipping units (cases) that make up one tier of the pallet. Multiply TI x HI to get total number of units (cases) in a Pallet."
+				},
+				"tolerance_type": {
+					"$ref": "#/definitions/varchar26",
+					"description": "The unit of tolerance for catch weight simple packs. Valid values are: 'A'-actual 'P' - percent."
+				},
+				"unit_cost": {
+					"$ref": "#/definitions/number20_4",
+					"description": "This field contains the current corporate unit cost for the item from the supplier /origin country. This field is stored in the Supplier's currency."
+				}
+			},
+			"required": [
+				"hi",
+				"inner_pack_size",
+				"item",
+				"origin_country_id",
+				"primary_country_ind",
+				"primary_supp_ind",
+				"round_lvl",
+				"supp_pack_size",
+				"supplier",
+				"ti",
+				"unit_cost"
+			],
+			"type": "object"
+		},
+		"varchar2250": {
+			"description": "This type can hold a string of max\n                length of 250 characters.\n            ",
+			"maxLength": 250,
+			"type": "string"
+		},
+		"varchar230": {
+			"description": "This type can hold a string of max\n                length of 30 characters.\n            ",
+			"maxLength": 30,
+			"type": "string"
+		},
+		"number12_4": {
+			"description": "This type can hold a number of digits count 12 and fraction digit count of 4.",
+			"type": "number"
+		},
+		"number20_4": {
+			"description": "This type can hold a number of digits count 20 and fraction digit count of 4.",
+			"type": "number"
+		},
+		"number4": {
+			"description": "This type can hold a number of digits count 4.",
+			"maximum": 2147483647,
+			"minimum": -2147483648,
+			"type": "integer"
+		},
+		"varchar21": {
+			"description": "This type can hold a string of max length of 1 characters.",
+			"maxLength": 1,
+			"type": "string"
+		},
+		"varchar210": {
+			"description": "This type can hold a string of max length of 10 characters.",
+			"maxLength": 10,
+			"type": "string"
+		},
+		"varchar225": {
+			"description": "This type can hold a string of max length of 25 characters.",
+			"maxLength": 25,
+			"type": "string"
+		},
+		"varchar23": {
+			"description": "This type can hold a string of max length of 3 characters.",
+			"maxLength": 3,
+			"type": "string"
+		},
+		"varchar24": {
+			"description": "This type can hold a string of max length of 4 characters.",
+			"maxLength": 4,
+			"type": "string"
+		},
+		"varchar26": {
+			"description": "This type can hold a string of max length of 6 characters.",
+			"maxLength": 6,
+			"type": "string"
+		},
+		"xs:dateTime": {
+			"type": "string"
+		}
+	},
+	"description": "JSON Schema generated by XMLSpy v2021 rel. 2 sp1 (x64) (http://www.altova.com)",
+	"properties": {
+		
+		"@xmlns:xs": {
+			"default": "http://www.w3.org/2001/XMLSchema"
+		},
+		"CustFlexAttriVo": {
+			"$ref": "#/definitions/.CustFlexAttriVo"
+		},
+		"ItemSupCtyDesc": {
+			"$ref": "#/definitions/.ItemSupCtyDesc"
+		}
+	},
+	"type": "object"
+}

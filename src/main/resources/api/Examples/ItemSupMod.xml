@@ -1,0 +1,26 @@
+<ItemSupDesc
+	xmlns="http://www.oracle.com/retail/integration/base/bo/ItemSupDesc/v1"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.oracle.com/retail/integration/base/bo/ItemSupDesc/v1 http://www.oracle.com/retail/integration/base/bo/ItemSupDesc/v1/ItemSupDesc.xsd ">
+	<item>jkGKXXWHVmjabMZeRtKNWæ±</item>
+	<supplier>MlEEpdæ±</supplier>
+	<primary_supp_ind>a</primary_supp_ind>
+	<vpn>YnSiwMsSliEgrFfzlUDKNRKAkFæ±</vpn>
+	<supp_label>IfqWFCsaJruæ±</supp_label>
+	<consignment_rate>12.4</consignment_rate>
+	<supp_diff_1>HTgfzHBzlZMWdGpLkNfOvYwaZXcGFBQInWDrkgLTlwdmgnBmTeaEbbOLajZRTgwzgHNRUgxhagZouQBNZHvImpIhUGfvgGVIqeHrCzjZuKJGONyxtalnæ±</supp_diff_1>
+	<supp_diff_2>OvlqWwjMhIqoENoFnTEunsFmVlcqSYPPwtkpdToxGBkPgJkCSyyecwiSjTcVRDpEEgAAAAvIPIpXonwcQqHLloJcPfSEydHAWJeMLiwJFQjUuKdkjrMtæ±</supp_diff_2>
+	<supp_diff_3>IpUAnGSiJeeCnZPmonnfmodeILmFUXNsvlecOmXWXhKsqikyBKJUHpBQzpcRKKDgPnIDiNehsObbNVGNbMPBHUtOilIJNdeJEFwMNXuitJmlFuIERSozæ±</supp_diff_3>
+	<supp_diff_4>jjMprRawQdWfDiWBishGskGajazijCLNcLxDroaTbPBFKNmRxNldZSZOKVTlikNJJGZWDDHrApIfkGUcGsxhqYoNIJNSzWWaWuXYGxnLnUsBhYityEFoæ±</supp_diff_4>
+	<pallet_name>apæ±</pallet_name>
+	<case_name>WDæ±</case_name>
+	<inner_name>Vzæ±</inner_name>
+	<supp_discontinue_date>2013-09-01T09:08:07</supp_discontinue_date>
+	<direct_ship_ind>a</direct_ship_ind>
+	<ns1:CustFlexAttriVo
+		xmlns:ns1="http://www.oracle.com/retail/integration/base/bo/CustFlexAttriVo/v1">
+		<ns1:name>XYIfyhvwvLMrlJWpESjdMsKVaXæ±</ns1:name>
+		<ns1:value>ibzIAXmlIKByYiIHVuauQoyTdlMjwaKdqdHPArQMmHoQXFnAebAIsBcBuzXKzgYhWvCCwDdoKffxOvuGwrOaNXyzbkiWPbekomNPtIeecubDOJYfgzJfLuVqzEQqAVNjwvnNjhbpZrfhJwkznmPbEpQcNmnvBDQlgZqVAVbbmqKBeURZJFUvvvnuIjAFoHAzLrAJFcJLJdqqmyjVbzTAIXJExuXmEJzrHJGqdGrppgHKNXOhXezWwhæ±</ns1:value>
+		<ns1:value_date>2013-09-01T09:08:07</ns1:value_date>
+	</ns1:CustFlexAttriVo>
+	<primary_case_size>Ixæ±</primary_case_size>
+</ItemSupDesc>

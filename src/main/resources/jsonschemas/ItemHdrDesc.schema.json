@@ -1,0 +1,888 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"additionalProperties": false,
+	"definitions": {
+		".CustFlexAttriVo": {
+			"additionalProperties": false,
+			"description": "This object is used to communicate customer flexible attributes defined for various entities\n               using RMS's CFAS (Customer Flexiable Attribute) structure.",
+			"properties": {
+				"name": {
+					"$ref": "#/definitions/varchar230",
+					"description": "Holds the attribute name."
+				},
+				"value": {
+					"$ref": "#/definitions/varchar2250",
+					"description": "Holds the numeric or string value of the attribute."
+				},
+				"value_date": {
+					"$ref": "#/definitions/xs:dateTime",
+					"description": "Holds the date value of the attribute."
+				}
+			},
+			"required": [
+				"name"
+			],
+			"type": "object"
+		},
+		".ItemHdrTlDesc": {
+			"additionalProperties": false,
+			"description": "Description is not available.",
+			"properties": {
+				"description": {
+					"$ref": "#/definitions/varchar2120",
+					"description": "This field will hold the language in which the translated text is maintained."
+				},
+				"iso_code": {
+					"$ref": "#/definitions/varchar26",
+					"description": "This field will hold the language in which the translated text is maintained."
+				},
+				"item_desc": {
+					"$ref": "#/definitions/varchar2250",
+					"description": "This field will hold the language in which the translated text is maintained."
+				},
+				"item_desc_secondary": {
+					"$ref": "#/definitions/varchar2250",
+					"description": "This field will hold the translated text of the primary description of the item."
+				},
+				"lang": {
+					"$ref": "#/definitions/number6",
+					"description": "This field will hold the language in which the translated text is maintained."
+				},
+				"short_desc": {
+					"$ref": "#/definitions/varchar2120",
+					"description": "This field will hold the language in which the translated text is maintained."
+				}
+			},
+			"type": "object"
+		},
+		".ItemHdrDesc": {
+			"additionalProperties": false,
+			"description": "Description is not available.",
+			"properties": {
+				"CustFlexAttriVo": {
+					"items": {
+						"$ref": "#/definitions/.CustFlexAttriVo"
+					},
+					"type": "array"
+				},
+				"ItemHdrTlDesc": {
+					"items": {
+						"$ref": "#/definitions/.ItemHdrTlDesc"
+					},
+					"type": "array"
+				},
+				"brand": {
+					"$ref": "#/definitions/varchar2120",
+					"description": "This is used to associate a brand to an item."
+				},
+				"brand_name": {
+					"$ref": "#/definitions/varchar230",
+					"description": "This field contains the brand associated to an item."
+				},
+				"break_case_ups": {
+					"$ref": "#/definitions/varchar24",
+					"description": "Not used by RMS."
+				},
+				"catch_weight_ind": {
+					"$ref": "#/definitions/varchar21",
+					"description": "Indiactes whether the item should be weighed when it arives at a location. Valid values for this field are 'Y' and 'N'."
+				},
+				"catch_weight_type": {
+					"$ref": "#/definitions/varchar21",
+					"description": "This column will hold catch weight type for a simple pack catch weight item. The value is based on the component items order_type and sale_type: 2 - order_type = Variable Weight, sale_type = Loose Weight 4 - order_type = Variable Weight, sale_type = Variable Weight Each The column will be set only at the time of Item approval. It will be used by the ReIM Invoice Matching process."
+				},
+				"catch_weight_uom": {
+					"$ref": "#/definitions/varchar24",
+					"description": "Indicates the UOM for Catchweight Items."
+				},
+				"class": {
+					"$ref": "#/definitions/varchar27",
+					"description": "Number identifying the class to which the item is attached. The item's class will be the same as that of its parent (and, by transitivity, to that of its grandparent). Valid values for this field are located on the class table."
+				},
+				"class_name": {
+					"$ref": "#/definitions/varchar2120",
+					"description": "Contains the name of the class."
+				},
+				"color": {
+					"$ref": "#/definitions/varchar224",
+					"description": "Not used by RMS."
+				},
+				"comments": {
+					"$ref": "#/definitions/varchar22000",
+					"description": "Holds any comments associated with the item."
+				},
+				"const_dimen_ind": {
+					"$ref": "#/definitions/varchar21",
+					"description": "Indicates that the dimensions of the product are always the same, regardless of the supplier. If this field is Y, the dimensions for all suppliers will be defaulted to the primary supplier/primary country dimensions. Editing of dimensions for the item will only be allowed for the primary supplier/primiary country."
+				},
+				"container_item": {
+					"$ref": "#/definitions/varchar225",
+					"description": "This holds the container item number for a contents item. This field is only populated and required if the DEPOSIT_ITEM_TYPE = E."
+				},
+				"container_type": {
+					"$ref": "#/definitions/varchar26",
+					"description": "Not used by RMS."
+				},
+				"contains_inner_ind": {
+					"$ref": "#/definitions/varchar21",
+					"description": "Indicates if pack item contains inner packs. Vendor packs will never contain inner packs and this field will be defaulted to 'N'. This field will only be available if the item is a pack item. Valid values are:Y = Yes, this pack contains inner packs; N = No, this pack does not contain inner packs."
+				},
+				"conveyable_flag": {
+					"$ref": "#/definitions/varchar21",
+					"description": "Not used by RMS."
+				},
+				"cost_zone_group_id": {
+					"$ref": "#/definitions/number4",
+					"description": "Cost zone group associated with the item. This field is only required when elc_ind (landed cost indicator) is set to 'Y' on the system_options table."
+				},
+				"default_waste_pct": {
+					"$ref": "#/definitions/number12_4",
+					"description": "Default daily wastage percent for spoilage type wastage items. This value will default to all item locations and represents the average amount of wastage that occurs on a daily basis."
+				},
+				"deposit_in_price_per_uom": {
+					"$ref": "#/definitions/varchar26",
+					"description": "This field indicates if the deposit amount is included in the price per UOM calculation for a contents item ticket. This value is only required if the DEPOSIT_ITEM_TYPE = E. Valid values are: I - Include deposit amount E - Exclude deposit amount"
+				},
+				"deposit_item_type": {
+					"$ref": "#/definitions/varchar26",
+					"description": "This is the deposit item component type. A NULL value in this field indicates that this item is not part of a deposit item relationship. The possible values are - E - Contents A - Container Z - Crate T - Returned Item (Empty bottle) P - Complex pack (with deposit items) The Returned item is flagged only to enable these items to be mapped to a separate GL account if required."
+				},
+				"dept": {
+					"$ref": "#/definitions/number4",
+					"description": "Number identifying the department to which the item is attached. The item's department will be the same as that of its parent (and, by transitivity, to that of its grandparent). Valid values for this field are located on the deps table."
+				},
+				"dept_name": {
+					"$ref": "#/definitions/varchar2120",
+					"description": "Contains the name of the department."
+				},
+				"desc_up": {
+					"$ref": "#/definitions/varchar2250",
+					"description": "All upper case description of the item (same as upper(item_desc)). This field is not displayed in the on-line item maintenance dialog, but is used in item list of value search processing through out the system."
+				},
+				"diff_1": {
+					"$ref": "#/definitions/varchar210",
+					"description": "Diff_group or diff_id that differentiates the current item from its item_parent. For an item that is a parent, this field may be either a group (i.e. Men's pant sizes) or a value (6 oz). For an item that is not a parent, this field may contain a value (34X34, Red, etc.). Valid values are found on the diff_group and diff_id tables."
+				},
+				"diff_1_aggregate_ind": {
+					"$ref": "#/definitions/varchar21",
+					"description": "Indicator for the corresponding diff. Indicator to aggregate inventory and sales for an item at Parent/Diff level (e.g Style/Color or Style/Size ). This indicator is currently used by allocation and MFP."
+				},
+				"diff_1_description": {
+					"$ref": "#/definitions/varchar2120",
+					"description": "This field will hold the description of differentiator."
+				},
+				"diff_1_level": {
+					"$ref": "#/definitions/varchar26",
+					"description": "This field will contain either ID or GROUP, based on whether the diff_1 is a group diff or a diff id."
+				},
+				"diff_1_type": {
+					"$ref": "#/definitions/varchar26",
+					"description": "This field will hold a value of all possible differential types. (for example, 'S' - size, 'C' - color, 'F' - flavor, 'E' - scent, 'P' - pattern). Valid values are stored on the code_detail table with the code_type 'DIFF' and on the diff_type table."
+				},
+				"diff_2": {
+					"$ref": "#/definitions/varchar210",
+					"description": "Diff_group or diff_id that differentiates the current item from its item_parent. For an item that is a parent, this field may be either a group (i.e. Mens pant sizes) or a value (6 oz). For an item that is not a parent, this field may contain a value (34X34, Red, etc.). Valid values are found on the diff_group and diff_id tables."
+				},
+				"diff_2_aggregate_ind": {
+					"$ref": "#/definitions/varchar21",
+					"description": "Indicator for the corresponding diff. Indicator to aggregate inventory and sales for an item at Parent/Diff level (e.g Style/Color or Style/Size ). This indicator is currently used by allocation and MFP."
+				},
+				"diff_2_description": {
+					"$ref": "#/definitions/varchar2120",
+					"description": "This field will hold the description of differentiator."
+				},
+				"diff_2_level": {
+					"$ref": "#/definitions/varchar26",
+					"description": "This field will contain either ID or GROUP, based on whether the diff_2 is a group diff or a diff id."
+				},
+				"diff_2_type": {
+					"$ref": "#/definitions/varchar26",
+					"description": "This field will hold a value of all possible differential types. (for example, 'S' - size, 'C' - color, 'F' - flavor, 'E' - scent, 'P' - pattern). Valid values are stored on the code_detail table with the code_type 'DIFF' and on the diff_type table."
+				},
+				"diff_3": {
+					"$ref": "#/definitions/varchar210",
+					"description": "Diff_group or diff_id that differentiates the current item from its item_parent. For an item that is a parent, this field may be either a group (i.e. Mens pant sizes) or a value (6 oz). For an item that is not a parent, this field may contain a value (34X34, Red, etc.). Valid values are found on the diff_group and diff_id tables."
+				},
+				"diff_3_aggregate_ind": {
+					"$ref": "#/definitions/varchar21",
+					"description": "Indicator for the corresponding diff. Indicator to aggregate inventory and sales for a fashion item at Parent/Diff level (e.g Style/Color or Style/Size ). This indicator is currently used by allocation and MFP."
+				},
+				"diff_3_description": {
+					"$ref": "#/definitions/varchar2120",
+					"description": "This field will hold the description of differentiator."
+				},
+				"diff_3_level": {
+					"$ref": "#/definitions/varchar26",
+					"description": "This field will contain either ID or GROUP, based on whether the diff_3 is a group diff or a diff id."
+				},
+				"diff_3_type": {
+					"$ref": "#/definitions/varchar26",
+					"description": "This field will hold a value of all possible differential types. (for example, 'S' - size, 'C' - color, 'F' - flavor, 'E' - scent, 'P' - pattern). Valid values are stored on the code_detail table with the code_type 'DIFF' and on the diff_type table."
+				},
+				"diff_4": {
+					"$ref": "#/definitions/varchar210",
+					"description": "Diff_group or diff_id that differentiates the current item from its item_parent. For an item that is a parent, this field may be either a group (i.e. Mens pant sizes) or a value (6 oz). For an item that is not a parent, this field may contain a value (34X34, Red, etc.). Valid values are found on the diff_group and diff_id tables."
+				},
+				"diff_4_aggregate_ind": {
+					"$ref": "#/definitions/varchar21",
+					"description": "Indicator for the corresponding diff. Indicator to aggregate inventory and sales for an item at Parent/Diff level (e.g Style/Color or Style/Size ). This indicator is currently used by allocation and MFP."
+				},
+				"diff_4_description": {
+					"$ref": "#/definitions/varchar2120",
+					"description": "This field will hold the description of differentiator."
+				},
+				"diff_4_level": {
+					"$ref": "#/definitions/varchar26",
+					"description": "This field will contain either ID or GROUP, based on whether the diff_4 is a group diff or a diff id."
+				},
+				"diff_4_type": {
+					"$ref": "#/definitions/varchar26",
+					"description": "This field will hold a value of all possible differential types. (for example, 'S' - size, 'C' - color, 'F' - flavor, 'E' - scent, 'P' - pattern). Valid values are stored on the code_detail table with the code_type 'DIFF' and on the diff_type table."
+				},
+				"division": {
+					"$ref": "#/definitions/number4",
+					"description": "Not used by RMS."
+				},
+				"expiration_days": {
+					"$ref": "#/definitions/number4",
+					"description": "The number of days before inventory is deemed to be no longer distributable"
+				},
+				"ext_source_system": {
+					"$ref": "#/definitions/varchar26",
+					"description": "Specifies what external system the data originated from."
+				},
+				"fit": {
+					"$ref": "#/definitions/varchar26",
+					"description": "Not used by RMS."
+				},
+				"forecast_ind": {
+					"$ref": "#/definitions/varchar21",
+					"description": "Indicates if this item will be interfaced to an external forecasting system (Y, N)."
+				},
+				"format_id": {
+					"$ref": "#/definitions/varchar21",
+					"description": "This field will hold the format ID that corresponds to the item's variable UPC. This value is only used for items with variable UPCs."
+				},
+				"fragile": {
+					"$ref": "#/definitions/varchar21",
+					"description": "Not used by RMS."
+				},
+				"freight_class": {
+					"$ref": "#/definitions/varchar24",
+					"description": "Not used by RMS."
+				},
+				"gift_wrap_ind": {
+					"$ref": "#/definitions/varchar21",
+					"description": "This field will contain a value of 'Y' if the item is eligible to be gift wrapped."
+				},
+				"handling_sensitivity": {
+					"$ref": "#/definitions/varchar26",
+					"description": "Holds the sensitivity information associated with the item. Valid values for this field are in the code type 'HSEN' on the code_head and code_detail tables."
+				},
+				"handling_sensitivity_desc": {
+					"$ref": "#/definitions/varchar240",
+					"description": "Contains the Handling sensitivity description corresponding to the handling_sensitivity value in item_master."
+				},
+				"handling_temp": {
+					"$ref": "#/definitions/varchar26",
+					"description": "Holds the temperature information associated with the item. Valid values for this field are in the code type 'HTMP' on the code_head and code_detail tables."
+				},
+				"handling_temp_desc": {
+					"$ref": "#/definitions/varchar240",
+					"description": "Contains the Handling temperature description corresponding to the handling_temp value in item_master."
+				},
+				"hazard_matl_code": {
+					"$ref": "#/definitions/varchar26",
+					"description": "Not used by RMS."
+				},
+				"high_value_ind": {
+					"$ref": "#/definitions/varchar21",
+					"description": "Not used by RMS."
+				},
+				"inventory_ind": {
+					"$ref": "#/definitions/varchar21",
+					"description": "Inventory Indicator"
+				},
+				"item": {
+					"$ref": "#/definitions/varchar225",
+					"description": "Unique alphanumeric value that identifies the item."
+				},
+				"item_aggregate_ind": {
+					"$ref": "#/definitions/varchar21",
+					"description": "Indicator to aggregate inventory and sales for the item. Currently, this indiactor is used by allocation and MFP to aggregate inventory for items. For staple items this indictor should be N."
+				},
+				"item_cube": {
+					"$ref": "#/definitions/number12_4",
+					"description": "Cubic dimension of an individual item"
+				},
+				"item_desc": {
+					"$ref": "#/definitions/varchar2250",
+					"description": "Long description of the item. This description is used through out the system to help online users identify the item. For items that have parents, this description will default to the parents description plus any differentiators. For items without parents this description will default to null."
+				},
+				"item_desc_secondary": {
+					"$ref": "#/definitions/varchar2250",
+					"description": "Secondary descriptions of the item. This field can only be populated when system_options.secondary_desc_ind = Y."
+				},
+				"item_grandparent": {
+					"$ref": "#/definitions/varchar225",
+					"description": "Alphanumeric value that uniquely identifies the item/group two levels above the item. This value must exist as both an item and an item parent in another row on the item_master table."
+				},
+				"item_height": {
+					"$ref": "#/definitions/number12_4",
+					"description": "Height of an individual Item"
+				},
+				"item_length": {
+					"$ref": "#/definitions/number12_4",
+					"description": "Length of an individual item"
+				},
+				"item_level": {
+					"$ref": "#/definitions/number1",
+					"description": "Number indicating which of the three levels the item resides. The item level determines if the item stands alone or if it is part of a family of related items. The item level also determines how the item may be used throughout the system."
+				},
+				"item_master_uda1": {
+					"$ref": "#/definitions/varchar220",
+					"description": "Not used by RMS."
+				},
+				"item_master_uda10": {
+					"$ref": "#/definitions/varchar220",
+					"description": "Not used by RMS."
+				},
+				"item_master_uda11": {
+					"$ref": "#/definitions/varchar220",
+					"description": "Not used by RMS."
+				},
+				"item_master_uda12": {
+					"$ref": "#/definitions/varchar220",
+					"description": "Not used by RMS."
+				},
+				"item_master_uda13": {
+					"$ref": "#/definitions/varchar220",
+					"description": "Not used by RMS."
+				},
+				"item_master_uda14": {
+					"$ref": "#/definitions/varchar220",
+					"description": "Not used by RMS."
+				},
+				"item_master_uda15": {
+					"$ref": "#/definitions/varchar220",
+					"description": "Not used by RMS."
+				},
+				"item_master_uda2": {
+					"$ref": "#/definitions/varchar220",
+					"description": "Not used by RMS."
+				},
+				"item_master_uda3": {
+					"$ref": "#/definitions/varchar220",
+					"description": "Not used by RMS."
+				},
+				"item_master_uda4": {
+					"$ref": "#/definitions/varchar220",
+					"description": "Not used by RMS."
+				},
+				"item_master_uda5": {
+					"$ref": "#/definitions/varchar220",
+					"description": "Not used by RMS."
+				},
+				"item_master_uda6": {
+					"$ref": "#/definitions/varchar220",
+					"description": "Not used by RMS."
+				},
+				"item_master_uda7": {
+					"$ref": "#/definitions/varchar220",
+					"description": "Not used by RMS."
+				},
+				"item_master_uda8": {
+					"$ref": "#/definitions/varchar220",
+					"description": "Not used by RMS."
+				},
+				"item_master_uda9": {
+					"$ref": "#/definitions/varchar220",
+					"description": "Not used by RMS."
+				},
+				"item_number_type": {
+					"$ref": "#/definitions/varchar26",
+					"description": "This type can hold a number of digits count umber_type."
+				},
+				"item_parent": {
+					"$ref": "#/definitions/varchar225",
+					"description": "Alphanumeric value that uniquely identifies the item/group at the level above the item. This value must exist as an item in another row on the item_master table."
+				},
+				"item_service_level": {
+					"$ref": "#/definitions/varchar26",
+					"description": "Holds a value that restricts the type of shipment methods that RCOM can select for an item."
+				},
+				"item_type": {
+					"$ref": "#/definitions/varchar26",
+					"description": "Code specifying what type the item is. Valid values for this field are in the code type UPCT on the code_head and code_detail tables."
+				},
+				"item_weight": {
+					"$ref": "#/definitions/number12_4",
+					"description": "Weight of an individual item"
+				},
+				"item_width": {
+					"$ref": "#/definitions/number12_4",
+					"description": "Width of an individual item"
+				},
+				"item_xform_ind": {
+					"$ref": "#/definitions/varchar21",
+					"description": "Indicator shows that an item is associated with an item transformation. The item is either the sellable or the orderable item in the transformation process."
+				},
+				"kitting_wip_code": {
+					"$ref": "#/definitions/varchar29",
+					"description": "Wip code used to designate the Kitting process used in item_master"
+				},
+				"merchandise_ind": {
+					"$ref": "#/definitions/varchar21",
+					"description": "Indicates if the item is a merchandise item (Y, N)."
+				},
+				"mfg_rec_retail": {
+					"$ref": "#/definitions/number20_4",
+					"description": "Manufacturer's recommended retail price for the item. Used for informational purposes only. This field is stored in the primary currency."
+				},
+				"mfgretailcurrencycode": {
+					"$ref": "#/definitions/varchar23",
+					"description": "The field indicates the currency code of the Manufacturer's retail price."
+				},
+				"new_item": {
+					"$ref": "#/definitions/varchar21",
+					"description": "Not used by RMS."
+				},
+				"notional_pack_ind": {
+					"$ref": "#/definitions/varchar21",
+					"description": "Indicates in SIM if a sellable simple pack needs to be broken down to its component item."
+				},
+				"order_as_type": {
+					"$ref": "#/definitions/varchar21",
+					"description": "Indicates if pack item is receivable at the component level or at the pack level (for a buyer pack only). This field is required if pack item is an orderable buyer pack. This field must be NULL if the pack is sellable only or a vendor pack. This field will only be available if the item is a pack item. Valid Values are: E = Eaches (component level) P = Pack (buyer pack only)."
+				},
+				"order_type": {
+					"$ref": "#/definitions/varchar29",
+					"description": "Indicates the type of order and which Open To Buy bucket will be updated."
+				},
+				"orderable_ind": {
+					"$ref": "#/definitions/varchar21",
+					"description": "Indicates if pack item is orderable. If it is 'Y' then the suppliers of the pack must supply all components in the pack. If it is 'N' then the components may have different suppliers. This field will only be available if the item is a pack item. Valid values are: Y = Yes, this pack may be ordered, N = No, this pack may not be ordered."
+				},
+				"original_retail": {
+					"$ref": "#/definitions/number20_4",
+					"description": "The field indicated the original retail price of the item per unit.This field is stored in the primary currency."
+				},
+				"originalretailcurrencycode": {
+					"$ref": "#/definitions/varchar23",
+					"description": "The field indicates the currency code of the original retail price."
+				},
+				"pack_ind": {
+					"$ref": "#/definitions/varchar21",
+					"description": "Indicates if the item is a pack. A pack item is a collection of items that may be either ordered or sold as a unit. Packs require details (i.e. component items and qtys, etc.) that other items do not. This field is required by the database."
+				},
+				"pack_type": {
+					"$ref": "#/definitions/varchar21",
+					"description": "Indicates if pack item is a vendor pack or a buyer pack. A vendor pack is a pack that the vendor or supplier recognizes and sells to the retailer. If the pack item is a vendor pack, communication with the supplier will use the vendor pack number. A buyer pack is a pack that a buyer created for internal ease of use. If the pack item is a buyer pack communication with the supplier will explode the pack out to its component items. This field will only be available if the item is a pack item. If the pack item is not orderable this field must be null. Valid values are: V = Vendor; B = Buyer."
+				},
+				"package_size": {
+					"$ref": "#/definitions/number12_4",
+					"description": "Holds the size of the product printed on any packaging (i.e. 24 ounces). This field is used for reporting purposes, as well as by Retek Price Mangement to determine same sized and different sized items."
+				},
+				"package_uom": {
+					"$ref": "#/definitions/varchar24",
+					"description": "Holds the unit of measure associated with the package size. This field is used for reporting purposes and by Retek Price Management to determine same sized and different sized items."
+				},
+				"perishable_ind": {
+					"$ref": "#/definitions/varchar21",
+					"description": "Not used by RMS."
+				},
+				"planned_residual": {
+					"$ref": "#/definitions/varchar21",
+					"description": "Not used by RMS."
+				},
+				"prefix": {
+					"$ref": "#/definitions/number2",
+					"description": "This column holds the prefix for variable weight UPCs. The prefix determines the format of the eventual UPC and will be used to decode variable weight UPCs that are uploaded from the POS. It is the clients responsibility to download this value to their"
+				},
+				"preticket_flag": {
+					"$ref": "#/definitions/varchar21",
+					"description": "Not used by RMS."
+				},
+				"primary_image_url": {
+					"$ref": "#/definitions/varchar2375",
+					"description": "This field will hold the primary item image url. It is only included for the ItemCre and ItemFulRep message types."
+				},
+				"primary_ref_item_ind": {
+					"$ref": "#/definitions/varchar21",
+					"description": "Indicates if the sub-transation level item is designated as the primary sub-transaction level item. For transaction level items and above the value in this field will be 'N'o."
+				},
+				"prod_classification_desc": {
+					"$ref": "#/definitions/varchar2120",
+					"description": "This field will hold the description of the product classification."
+				},
+				"product_classification": {
+					"$ref": "#/definitions/varchar26",
+					"description": "This contains item combinability codes (with code type 'PCLA') which provide a way to define which items can be combined (packed or boxed) together."
+				},
+				"purchase_type": {
+					"$ref": "#/definitions/varchar26",
+					"description": "Indicates if an item is a normal, consignment or concession item - 'N' for normal, 'S' for consignment, 'C' for concession."
+				},
+				"putaway_by_volume": {
+					"$ref": "#/definitions/varchar26",
+					"description": "If set to Y, putaway will be determined by cube or volume. If set to N, putaway will be determined by capacity."
+				},
+				"putaway_plan": {
+					"$ref": "#/definitions/varchar220",
+					"description": "Plan used for putaway"
+				},
+				"retail_label_type": {
+					"$ref": "#/definitions/varchar26",
+					"description": "This field indicates any special lable type assoctiated with an item (i.e. pre-priced or cents off). This field is used for reporting purposes only. Values for this field are defined by the 'RTLT' code on code detail."
+				},
+				"retail_label_type_desc": {
+					"$ref": "#/definitions/varchar240",
+					"description": "Contains the retail label type description corresponding to the retail_label_type value in item_master."
+				},
+				"retail_label_value": {
+					"$ref": "#/definitions/number20_4",
+					"description": "This field represents the value associated with the retail label type."
+				},
+				"rigid": {
+					"$ref": "#/definitions/varchar21",
+					"description": "Not used by RMS."
+				},
+				"roundable_flag": {
+					"$ref": "#/definitions/varchar21",
+					"description": "Not used by RMS."
+				},
+				"sale_type": {
+					"$ref": "#/definitions/varchar26",
+					"description": "n/a"
+				},
+				"sellable_ind": {
+					"$ref": "#/definitions/varchar21",
+					"description": "Indicates if pack item may be sold as a unit. If it is 'Y' then the pack will have its own unique unit retail. If it is 'N' then the pack's unit retail is the sum of each individual item's total retail within the pack. This field will only be available if the item is a pack item. Value values are: Y = Yes, this pack may be sold as a unit; N = No, this pack man not be sold as a unit."
+				},
+				"shade": {
+					"$ref": "#/definitions/varchar26",
+					"description": "Not used by RMS."
+				},
+				"ship_alone": {
+					"$ref": "#/definitions/varchar21",
+					"description": "Not used by RMS."
+				},
+				"ship_alone_ind": {
+					"$ref": "#/definitions/varchar21",
+					"description": "This field will contain a value of 'Y' if the item should be shipped to the customer is a seperate package versus being grouped together in a box."
+				},
+				"short_desc": {
+					"$ref": "#/definitions/varchar2120",
+					"description": "Shortened description of the item. This description is the default for downloading to the POS. For items that have parents, this description will default to the parent's short description. For items without parents, this description will default to null."
+				},
+				"simple_pack_ind": {
+					"$ref": "#/definitions/varchar21",
+					"description": "Indicates if pack item is a simple pack or not. This field will only be available if the item is a pack item. A simple pack is an item whose components are all the same item (i.e. a six pack of cola, etc). Valid values are:Y = Yes, this item is a simple pack; N = No if this is not a simple pack."
+				},
+				"single_contain_bulk": {
+					"$ref": "#/definitions/varchar21",
+					"description": "Not used by RMS."
+				},
+				"single_price_flag": {
+					"$ref": "#/definitions/varchar21",
+					"description": "Not used by RMS."
+				},
+				"size1": {
+					"$ref": "#/definitions/varchar26",
+					"description": "Not used by RMS."
+				},
+				"sku_optimization": {
+					"$ref": "#/definitions/varchar21",
+					"description": "Indicator for inclusion in SKU optimization"
+				},
+				"slottable": {
+					"$ref": "#/definitions/varchar21",
+					"description": "Not used by RMS."
+				},
+				"soh_inquiry_at_pack_ind": {
+					"$ref": "#/definitions/varchar21",
+					"description": "Indicates in SIM if a notional simple pack item's inventory should be displayed in packs."
+				},
+				"sortable": {
+					"$ref": "#/definitions/varchar21",
+					"description": "Not used by RMS."
+				},
+				"sorter_group": {
+					"$ref": "#/definitions/varchar26",
+					"description": "Sorter Group identifier"
+				},
+				"standard_uom": {
+					"$ref": "#/definitions/varchar24",
+					"description": "Unit of measure in which stock of the item is tracked at a corporate level."
+				},
+				"status": {
+					"$ref": "#/definitions/varchar21",
+					"description": "Status of the item. Valid values are: W = Worksheet: item setup in progress, cannot be used in system; S = Submitted: item setup complete and awaiting approval, cannot be use in system; A = Approved: item is approved and can now be used throughout the system."
+				},
+				"std_unit_factor": {
+					"$ref": "#/definitions/number6_2",
+					"description": "Used for putaway by volume. The percentage of the standard number of units that will fit into a location type."
+				},
+				"std_unit_qty": {
+					"$ref": "#/definitions/number12_4",
+					"description": "The number of items that normally fit on/in the container type"
+				},
+				"std_unit_weight": {
+					"$ref": "#/definitions/number20_10",
+					"description": "Not used by RMS."
+				},
+				"store_ord_mult": {
+					"$ref": "#/definitions/varchar21",
+					"description": "Merchandise shipped from the warehouses to the stores must be specified in this unit type. Valid values are:C = Cases; I = Inner; E = Eaches."
+				},
+				"sub_name": {
+					"$ref": "#/definitions/varchar2120",
+					"description": "Contains the name of the subclass."
+				},
+				"subclass": {
+					"$ref": "#/definitions/varchar24",
+					"description": "Number identifying the subclass to which the item is attached. The item's subclass will be the same as that of its parent (and, by transitivity, to that of its grandparent). Valid values for this field are located on the subclass table."
+				},
+				"ticket_type": {
+					"$ref": "#/definitions/varchar24",
+					"description": "Not used by RMS."
+				},
+				"tran_level": {
+					"$ref": "#/definitions/number1",
+					"description": "Number indicating which of the three levels transactions occur for the item's group. The transaction level is the level at which the item's inventory is tracked in the system. The transaction level item will be counted, transferred, shipped, etc. The transaction level may be at the current item or up to 2 levels above or below the current item. Only one level of the hierarchy of an item family may contain transaction level items."
+				},
+				"transport_ind": {
+					"$ref": "#/definitions/varchar21",
+					"description": "Not used by RMS."
+				},
+				"unique_class": {
+					"$ref": "#/definitions/number12",
+					"description": "This field uniquely identify the class which the item belongs to.Class is not unique ID the merchandise hierarchy.The combination of Dept/Class is unique, but requires use of a composite key.The composite key is generally used in user interfaces.The unique ID can be used in back end processing or in systems that can not have a composite key in the merchandise hierarchy."
+				},
+				"unique_subclass": {
+					"$ref": "#/definitions/number12",
+					"description": "This field uniquely identify the subclass which the item belongs to.Sublass is not unique ID the merchandise hierarchy.The combination of Dept/Class/Subclass is unique, but requires use of a composite key.The composite key is generally used in user interfaces.The unique ID can be used in back end processing or in systems that can not have a composite key in the merchandise hierarchy."
+				},
+				"unit_pick_system_code": {
+					"$ref": "#/definitions/varchar212",
+					"description": "Not used by RMS."
+				},
+				"unit_retail": {
+					"$ref": "#/definitions/number20_4",
+					"description": "This field holds the unit retail in the standard unit of measure for the item/zone combination. This field is stored in the local currency."
+				},
+				"unit_ticket_qty": {
+					"$ref": "#/definitions/number3",
+					"description": "Item Master User Defined Attribute"
+				},
+				"uom_conv_factor": {
+					"$ref": "#/definitions/number20_10",
+					"description": "Conversion factor between an \"Each\" and the standard_uom when the standard_uom is not in the quantity class (e.g. if standard_uom = lb and 1 lb = 10 eaches, this factor will be 10). This factor will be used to convert sales and stock data when an item is retailed in eaches but does not have eaches as its standard unit of measure."
+				},
+				"velocity": {
+					"$ref": "#/definitions/number12_4",
+					"description": "Not used by RMS."
+				},
+				"vendor_nbr": {
+					"$ref": "#/definitions/varchar210",
+					"description": "Not used by RMS."
+				},
+				"vendor_style": {
+					"$ref": "#/definitions/varchar215",
+					"description": "Not used by RMS."
+				},
+				"waste_pct": {
+					"$ref": "#/definitions/number12_4",
+					"description": "Average percent of wastage for the item over its shelf life. Used in inflating the retail price for wastage items."
+				},
+				"waste_type": {
+					"$ref": "#/definitions/varchar26",
+					"description": "Identifies the wastage type as either sales or spoilage wastage. Sales wastage occurs during processes that make an item saleable (i.e. fat is trimmed off at customer request). Spoilage wastage occurs during the products shelf life (i.e. evaporation causes the product to weight less after a period of time). Valid values are: SP - spoilage; and SL - Sales."
+				},
+				"waste_type_desc": {
+					"$ref": "#/definitions/varchar240",
+					"description": "Contains the Waste Type description corresponding to the Waste_Type value in item_master."
+				}
+			},
+			"required": [
+				"item",
+				"item_number_type"
+			],
+			"type": "object"
+		},
+		
+		"varchar230": {
+			"description": "This type can hold a string of max\n                length of 30 characters.\n            ",
+			"maxLength": 30,
+			"type": "string"
+		},
+		"number6": {
+			"description": "This type can hold a number of digits count 6.",
+			"maximum": 2147483647,
+			"minimum": -2147483648,
+			"type": "integer"
+		},
+
+		"varchar2250": {
+			"description": "This type can hold a string of max length of 250 characters.",
+			"maxLength": 250,
+			"type": "string"
+		},
+		
+		"number1": {
+			"description": "This type can hold a number of digits count 1.",
+			"maximum": 2147483647,
+			"minimum": -2147483648,
+			"type": "integer"
+		},
+		"number12": {
+			"description": "This type can hold a number of digits count 12.",
+			"type": "number"
+		},
+		"number12_4": {
+			"description": "This type can hold a number of digits count 12 and fraction digit count of 4.",
+			"type": "number"
+		},
+		"number2": {
+			"description": "This type can hold a number of digits count 2.",
+			"maximum": 2147483647,
+			"minimum": -2147483648,
+			"type": "integer"
+		},
+		"number20": {
+			"description": "This type can hold a number of digits count 20.",
+			"type": "number"
+		},
+		"number20_10": {
+			"description": "This type can hold a number of digits count 20 and fraction digit count of 10.",
+			"type": "number"
+		},
+		"number20_4": {
+			"description": "This type can hold a number of digits count 20 and fraction digit count of 4.",
+			"type": "number"
+		},
+		"number3": {
+			"description": "This type can hold a number of digits count 3.",
+			"maximum": 2147483647,
+			"minimum": -2147483648,
+			"type": "integer"
+		},
+		"number4": {
+			"description": "This type can hold a number of digits count 4.",
+			"maximum": 2147483647,
+			"minimum": -2147483648,
+			"type": "integer"
+		},
+		"number6_2": {
+			"description": "This type can hold a number of digits count 6_2.",
+			"type": "number"
+		},
+		"number8": {
+			"description": "This type can hold a number of digits count 8.",
+			"maximum": 2147483647,
+			"minimum": -2147483648,
+			"type": "integer"
+		},
+		"varchar21": {
+			"description": "This type can hold a string of max length of 1 characters.",
+			"maxLength": 1,
+			"type": "string"
+		},
+		"varchar210": {
+			"description": "This type can hold a string of max length of 10 characters.",
+			"maxLength": 10,
+			"type": "string"
+		},
+		"varchar212": {
+			"description": "This type can hold a string of max length of 12 characters.",
+			"maxLength": 12,
+			"type": "string"
+		},
+		"varchar2120": {
+			"description": "This type can hold a string of max length of 120 characters.",
+			"maxLength": 120,
+			"type": "string"
+		},
+		"varchar215": {
+			"description": "This type can hold a string of max length of 15 characters.",
+			"maxLength": 15,
+			"type": "string"
+		},
+		"varchar220": {
+			"description": "This type can hold a string of max length of 20 characters.",
+			"maxLength": 20,
+			"type": "string"
+		},
+		"varchar22000": {
+			"description": "This type can hold a string of max length of 2000 characters.",
+			"maxLength": 2000,
+			"type": "string"
+		},
+		"varchar224": {
+			"description": "This type can hold a string of max length of 24 characters.",
+			"maxLength": 24,
+			"type": "string"
+		},
+		"varchar225": {
+			"description": "This type can hold a string of max length of 25 characters.",
+			"maxLength": 25,
+			"type": "string"
+		},
+		
+		"varchar23": {
+			"description": "This type can hold a string of max length of 3 characters.",
+			"maxLength": 3,
+			"type": "string"
+		},
+
+		"varchar2375": {
+			"description": "This type can hold a string of max length of 375 characters.",
+			"maxLength": 375,
+			"type": "string"
+		},
+		"varchar24": {
+			"description": "This type can hold a string of max length of 4 characters.",
+			"maxLength": 4,
+			"type": "string"
+		},
+		"varchar240": {
+			"description": "This type can hold a string of max length of 40 characters.",
+			"maxLength": 40,
+			"type": "string"
+		},
+		"varchar26": {
+			"description": "This type can hold a string of max length of 6 characters.",
+			"maxLength": 6,
+			"type": "string"
+		},
+		"varchar27": {
+			"description": "This type can hold a string of max length of 7 characters.",
+			"maxLength": 7,
+			"type": "string"
+		},
+		"varchar29": {
+			"description": "This type can hold a string of max length of 9 characters.",
+			"maxLength": 9,
+			"type": "string"
+		},
+		"xs:dateTime": {
+			"type": "string"
+		}
+	},
+	"description": "JSON Schema generated by XMLSpy v2021 rel. 2 sp1 (x64) (http://www.altova.com)",
+	"properties": {
+		"@xmlns:xs": {
+			"default": "http://www.w3.org/2001/XMLSchema"
+		},
+		"CustFlexAttriVo": {
+			"$ref": "#/definitions/.CustFlexAttriVo"
+		},
+		"ItemHdrTlDesc": {
+			"$ref": "#/definitions/.ItemHdrTlDesc"
+		},
+		"ItemHdrDesc": {
+			"$ref": "#/definitions/.ItemHdrDesc"
+		}
+	},
+	"type": "object"
+}

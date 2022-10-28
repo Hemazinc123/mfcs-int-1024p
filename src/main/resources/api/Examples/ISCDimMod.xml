@@ -1,0 +1,23 @@
+<ISCDimDesc
+	xmlns="http://www.oracle.com/retail/integration/base/bo/ISCDimDesc/v1"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.oracle.com/retail/integration/base/bo/ISCDimDesc/v1 http://www.oracle.com/retail/integration/base/bo/ISCDimDesc/v1/ISCDimDesc.xsd ">
+	<item>FrEMNdqqHuQvIswpElyATæ±</item>
+	<supplier>oKoNzsæ±</supplier>
+	<origin_country>a</origin_country>
+	<dim_object>qbæ±</dim_object>
+	<object_desc>NcTPGybCyXBWNzrPVUWNjXEoACEasCgTaEQKæ±</object_desc>
+	<presentation_method>snæ±</presentation_method>
+	<method_desc>oSqVmuZqXfANVwfSPdNKySodMXNSaFteiTeeæ±</method_desc>
+	<length>12.4</length>
+	<width>12.4</width>
+	<height>12.4</height>
+	<lwh_uom>æ±</lwh_uom>
+	<weight>12.4</weight>
+	<net_weight>12.4</net_weight>
+	<weight_uom>æ±</weight_uom>
+	<liquid_volume>12.4</liquid_volume>
+	<liquid_volume_uom>æ±</liquid_volume_uom>
+	<stat_cube>12.4</stat_cube>
+	<tare_weight>12.4</tare_weight>
+	<tare_type>VYæ±</tare_type>
+</ISCDimDesc>

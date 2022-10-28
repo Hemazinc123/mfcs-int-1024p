@@ -1,0 +1,572 @@
+#%RAML 1.0
+title: MFCS-INT-024P
+version: v1
+description: item publisher api
+protocols: [HTTP,HTTPS]
+securedBy: [basic,oauto]
+securitySchemes:
+  basic: !include security Schemas/BasicAuthsecurityScheme.raml
+  oauto: !include security Schemas/OAuthsecurityScheme.raml
+traits:
+  Reusable codes: !include traits/reusable.raml
+baseUri: https://{baseURL}/api/im/MFCS-INT-024P/v1/
+baseUriParameters:
+  baseURL:
+    description: Use the below baseURL's for each specific env.
+    enum:
+      - esb-dev01.test.com
+      - esb-qa01.test.com
+      - esb-uat01.test.com
+      - esb-prod01.com
+
+/Item:
+  post:
+    is: [Reusable codes]
+    body:
+      application/xml:
+        example: !include Examples/itemCre.xml
+        type: !include schemas/ItemDesc.xsd
+    responses:
+      201:
+        body:
+          application/json:
+            example: !include Examples/Response.json
+  delete:
+    is: [Reusable codes]
+    body:
+      application/xml:
+        example: !include Examples/ItemDel.xml
+        type: !include schemas/ItemRef.xsd
+    responses:
+      201:
+        body:
+          application/json:
+            example: !include Examples/Response.json
+/ItemHdr:
+  patch:
+    is: [Reusable codes]
+    description: Item header Mod
+    body:
+      application/xml:
+        example: !include Examples/ItemHdrMod.xml
+        type: !include schemas/ItemHdrDesc.xsd
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include Examples/Response.json
+/ItemSup:
+  post:
+    is: [Reusable codes]
+    description: Item Supplier Created
+    body:
+      application/xml:
+        example: !include Examples/ItemSupCre.xml
+        type: !include schemas/ItemSupDesc.xsd
+    responses:
+      201:
+        body:
+          application/json:
+            example: !include Examples/Response.json
+  patch:
+    is: [Reusable codes]
+    description: Item Supplier Mod
+    body:
+      application/xml:
+        example: !include Examples/ItemSupMod.xml
+        type: !include schemas/ItemSupDesc.xsd
+    responses:
+      200:
+        body:
+          application/xml:
+            example: !include Examples/Response.json
+  delete:
+    is: [Reusable codes]
+    description: Item Supplier Delete
+    body:
+      application/xml:
+        example: !include Examples/ItemSupDel.xml
+        type: !include schemas/ItemSupRef.xsd
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include Examples/Response.json 
+/itemSupCty:
+  post:
+    is: [Reusable codes]
+    description: Item Supplier Country Cre
+    body:
+      application/xml:
+        example: !include Examples/ItemSupCtyCre.xml
+        type: !include schemas/ItemSupCtyDesc.xsd
+    responses:
+      201:
+        body:
+          application/json:
+            example: !include Examples/Response.json
+  patch:
+    is: [Reusable codes]
+    description: Item Supplier Country Mod
+    body:
+      application/xml:
+        example: !include Examples/ItemSupCtyMod.xml
+        type: !include schemas/ItemSupCtyDesc.xsd
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include Examples/Response.json
+  delete:
+    is: [Reusable codes]
+    description: Item Supplier Country Del
+    body:
+      application/xml:
+        example: !include Examples/ItemSupDel.xml
+        type: !include schemas/ItemSupRef.xsd
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include Examples/Response.json
+/iSCMfr:
+  post:
+    is: [Reusable codes]
+    body:
+      application/xml:
+        example: !include Examples/ItemSupCtyMfrDesc.xml
+        type: !include schemas/ItemSupCtyMfrDesc.xsd
+    responses:
+      201:
+        body:
+          application/json:
+            example: !include Examples/Response.json
+  patch:
+    is: [Reusable codes]
+    body:
+      application/xml:
+        example: !include Examples/ItemSupCtyMfrDesc.xml
+        type: !include schemas/ItemSupCtyMfrDesc.xsd
+    responses:
+      201:
+        body:
+          application/json:
+            example: !include Examples/Response.json
+  delete:
+    is: [Reusable codes]
+    body:
+      application/xml:
+        example: !include Examples/ItemSupCtyMfrRef.xml
+        type: !include schemas/ItemSupCtyMfrRef.xsd
+    responses:
+      201:
+        body:
+          application/json:
+            example: !include Examples/Response.json
+/ISCDim:
+  post:
+    is: [Reusable codes]
+    body:
+      application/xml:
+        example: !include Examples/ISCDimCre.xml
+        type: !include schemas/ISCDimDesc.xsd
+    responses:
+      201:
+        body:
+          application/json:
+            example: !include Examples/Response.json
+  patch:
+    is: [Reusable codes] 
+    description: Item Supp Country Dimensions Mod
+    body:
+      application/xml:
+        example: !include Examples/ISCDimMod.xml
+        type: !include schemas/ISCDimDesc.xsd
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include Examples/Response.json
+  delete:
+    is: [Reusable codes]
+    description: Item Supp Country Dimension Del
+    body:
+      application/xml:
+        example: !include Examples/ISCDimDel.xml
+        type: !include schemas/ISCDimRef.xsd
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include Examples/Response.json
+/RelltemHead:
+  post:
+    is: [Reusable codes]
+    description: Related Item Header cre
+    body:
+      application/xml:
+        example: !include Examples/RelltemHeadCre.xml
+        type: !include schemas/RelatedItemDesc.xsd
+    responses:
+      201:
+        body:
+          application/json:
+            example: !include Examples/Response.json
+  delete:
+    is: [Reusable codes]
+    description: Related Item Detail Cre
+    body:
+      application/xml:
+        example: !include Examples/RelItemHeadDel-RelItemDetDel.xml
+        type: !include schemas/RelatedItemRef.xsd
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include Examples/Response.json
+/RelItemDet:
+  post:
+    is: [Reusable codes]
+    description: Related Item Detail Cre
+    body:
+      application/xml:
+        example: !include Examples/RelItemDetCre.xml
+        type: !include schemas/RelatedItemDesc.xsd
+    responses:
+      201:
+        body:
+          application/json:
+            example: !include Examples/Response.json
+  patch:
+    is: [Reusable codes]
+    description: Related Item Detail Mod
+    body:
+      application/xml:
+        example: !include Examples/RelItemDetMod.xml
+        type: !include schemas/RelatedItemDesc.xsd
+    responses:
+      201:
+        body:
+          application/json:
+            example: !include Examples/Response.json
+  delete:
+    is: [Reusable codes]
+    description: Related Item Detail Cre
+    body:
+      application/xml:
+        example: !include Examples/RelItemHeadDel-RelItemDetDel.xml
+        type: !include schemas/RelatedItemRef.xsd
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include Examples/Response.json
+/ItemUDALOV:
+  post:
+    is: [Reusable codes]
+    body:
+      application/xml:
+        example: !include Examples/ItemUDALOVCre.xml
+        type: !include schemas/ItemUDALOVDesc.xsd
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include Examples/Response.json
+  patch:
+    is: [Reusable codes]
+    body:
+      application/xml:
+        example: !include Examples/ItemUDALOVMod.xml
+        type: !include schemas/ItemUDALOVDesc.xsd
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include Examples/Response.json
+  delete:
+    is: [Reusable codes]
+    body:
+      application/xml:
+        example: !include Examples/ItemUDALOVDel.xml
+        type: !include schemas/ItemUDALOVRef.xsd
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include Examples/Response.json
+/ItemUDAFF:
+  post:
+    is: [Reusable codes]
+    body:
+      application/xml:
+        example: !include Examples/ItemUDAFFCre.xml
+        type: !include schemas/ItemUDAFFDesc.xsd
+    responses:
+      201:
+        body:
+          application/json:
+            example: !include Examples/Response.json
+  patch:
+    is: [Reusable codes]
+    body:
+      application/xml:
+        example: !include Examples/ItemUDAFFMod.xml
+        type: !include schemas/ItemUDAFFDesc.xsd
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include Examples/Response.json
+  delete:
+    is: [Reusable codes]
+    body:
+      application/xml:
+        example: !include Examples/ItemUDAFFDel.xml
+        type: !include schemas/ItemUDAFFRef.xsd
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include Examples/Response.json
+/ItemUDADate:
+  post:
+    is: [Reusable codes]
+    body:
+      application/xml:
+        example: !include Examples/ItemUDADateCre.xml
+        type: !include schemas/ItemUDADateDesc.xsd
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include Examples/Response.json
+  patch:
+    is: [Reusable codes]
+    body:
+      application/xml:
+        example: !include Examples/ItemUDADateMod.xml
+        type: !include schemas/ItemUDADateDesc.xsd
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include Examples/Response.json
+  delete:
+    is: [Reusable codes]
+    body:
+      application/xml:
+        example: !include Examples/ItemUDADateDel.xml
+        type: !include schemas/ItemUDADateRef.xsd
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include Examples/Response.json
+/ItemUPC:
+  post:
+    is: [Reusable codes]
+    body:
+      application/xml:
+        example: !include Examples/ItemUPCCre.xml
+        type: !include schemas/ItemUPCDesc.xsd
+    responses:
+      201:
+        body:
+          application/json:
+            example: !include Examples/Response.json
+  patch:
+    is: [Reusable codes]
+    body:
+      application/xml:
+        example: !include Examples/ItemUPCMod.xml
+        type: !include schemas/ItemUPCDesc.xsd
+    responses:
+      201:
+        body:
+          application/json:
+            example: !include Examples/Response.json
+  delete:
+    is: [Reusable codes]
+    body:
+      application/xml:
+        example: !include Examples/ItemUPCDel.xml
+        type: !include schemas/ItemUPCRef.xsd
+    responses:
+      201:
+        body:
+          application/json:
+            example: !include Examples/Response.json
+/ItemBOM:
+  post:
+    is: [Reusable codes]
+    body:
+      application/xml:
+        example: !include Examples/ItemBOMCre.xml
+        type: !include schemas/ItemBOMDesc.xsd
+    responses:
+      201:
+        body:
+          application/json:
+            example: !include Examples/Response.json
+  patch:
+    is: [Reusable codes]
+    body:
+      application/xml:
+        example: !include Examples/ItemBOMMod.xml
+        type: !include schemas/ItemBOMDesc.xsd
+    responses:
+      201:
+        body:
+          application/json:
+            example: !include Examples/Response.json
+  delete:
+    is: [Reusable codes]
+    body:
+      application/xml:
+        example: !include Examples/ItemBOMDel.xml
+        type: !include schemas/ItemBOMRef.xsd
+    responses:
+      201:
+        body:
+          application/json:
+            example: !include Examples/Response.json
+/ItemImage:
+  post:
+    is: [Reusable codes]
+    body:
+      application/xml:
+        example: !include Examples/ItemImageCre.xml
+        type: !include schemas/ItemImageDesc.xsd
+    responses:
+      201:
+        body:
+          application/json:
+            example: !include Examples/Response.json
+  patch:
+    is: [Reusable codes]
+    body:
+      application/xml:
+        example: !include Examples/ItemImageMod.xml
+        type: !include schemas/ItemImageDesc.xsd
+    responses:
+      201:
+        body:
+          application/json:
+            example: !include Examples/Response.json
+  delete:
+    is: [Reusable codes]
+    body:
+      application/xml:
+        example: !include Examples/ItemImageDel.xml
+        type: !include schemas/ItemImageRef.xsd
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include Examples/Response.json
+/ItemTckt:
+  post:
+    is: [Reusable codes]
+    body:
+      application/xml:
+        example: !include Examples/ItemTcktCre.xml
+        type: !include schemas/ItemTcktDesc.xsd
+    responses:
+      201:
+        body:
+          application/json:
+            example: !include Examples/Response.json
+  delete:
+    is: [Reusable codes]
+    body:
+      application/xml:
+        example: !include Examples/ItemTcktDel.xml
+        type: !include schemas/ItemTcktRef.xsd
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include Examples/Response.json
+            
+    
+
+    
+
+  
+
+  
+    
+          
+
+
+
+    
+          
+
+          
+    
+
+          
+       
+    
+
+      
+          
+      
+    
+
+          
+          
+          
+
+          
+        
+
+          
+      
+          
+
+      
+          
+
+
+           
+
+
+          
+              
+          
+        
+     
+        
+              
+            
+        
+  
+          
+
+
+
+              
+
+
+
+          
+
+          
+
+
+
+              
+
+  
+    
+          
+
+              
+        
+          
+
+ 
+  

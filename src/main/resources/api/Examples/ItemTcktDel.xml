@@ -1,0 +1,6 @@
+<ItemTcktRef
+	xmlns="http://www.oracle.com/retail/integration/base/bo/ItemTcktRef/v1"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.oracle.com/retail/integration/base/bo/ItemTcktRef/v1 http://www.oracle.com/retail/integration/base/bo/ItemTcktRef/v1/ItemTcktRef.xsd ">
+	<item>MPGyKIxXlKSfkwXuBklNzæ±</item>
+	<ticket_type_id>æ±</ticket_type_id>
+</ItemTcktRef>

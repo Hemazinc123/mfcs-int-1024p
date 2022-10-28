@@ -1,0 +1,15 @@
+<RelatedItemDesc
+	xmlns="http://www.oracle.com/retail/integration/base/bo/RelatedItemDesc/v1"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.oracle.com/retail/integration/base/bo/RelatedItemDesc/v1 http://www.oracle.com/retail/integration/base/bo/RelatedItemDesc/v1/RelatedItemDesc.xsd ">
+	<item>QBaJMdyGXxnMOyBPEVMaQæ±</item>
+	<relationship_id>15</relationship_id>
+	<relationship_name>qvxlHeDFLGhAXJlxjbTTDyHWXiCAaupoTwcwwYLyqUicwpAYAuiiUKSRHNuBYLSYxHqgMffgXqLMfeJegDIzRJdMlHlGvTeOWHZdqDORnxTmblCDrrofæ±</relationship_name>
+	<relationship_type>eNæ±</relationship_type>
+	<mandatory_ind>Y</mandatory_ind>
+	<RelatedItemDtl>
+		<related_item>ROkqExYMTlrYncbzRWcGYæ±</related_item>
+		<priority>4</priority>
+		<effective_date>2013-09-01T09:08:07</effective_date>
+		<end_date>2013-09-01T09:08:07</end_date>
+	</RelatedItemDtl>
+</RelatedItemDesc>

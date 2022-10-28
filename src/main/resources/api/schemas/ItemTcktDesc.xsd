@@ -1,0 +1,135 @@
+<xs:schema elementFormDefault="qualified" targetNamespace="http://www.oracle.com/retail/integration/base/bo/ItemTcktDesc/v1" version="1.0" xmlns="http://www.oracle.com/retail/integration/base/bo/ItemTcktDesc/v1" xmlns:retailDoc="http://www.w3.org/2001/XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <retailDoc:annotation>
+      <retailDoc:documentation>This is root element of this document which contains name space definitions for the document elements.</retailDoc:documentation>
+   </retailDoc:annotation>
+   <xs:element name="TicketTypeDtl">
+      <retailDoc:annotation>
+         <retailDoc:documentation>Description is not available.</retailDoc:documentation>
+      </retailDoc:annotation>
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element minOccurs="0" name="ticket_item_id" type="varchar24">
+               <retailDoc:annotation>
+                  <retailDoc:documentation>This field contains a character string which uniquely identifies an attribute which will appear on a ticket or label such as retail price or price per unit of measure.</retailDoc:documentation>
+               </retailDoc:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="ticket_item_id_desc" type="varchar2250">
+               <retailDoc:annotation>
+                  <retailDoc:documentation>This field contains the description of the ticket_item_id.</retailDoc:documentation>
+               </retailDoc:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="uda_id" type="number5">
+               <retailDoc:annotation>
+                  <retailDoc:documentation>This field contains a number which uniquely defines a user-defined attribute which is to be printed on this ticket type.</retailDoc:documentation>
+               </retailDoc:annotation>
+            </xs:element>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="ItemTcktDesc">
+      <retailDoc:annotation>
+         <retailDoc:documentation>Description is not available.</retailDoc:documentation>
+      </retailDoc:annotation>
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element name="item" type="varchar225">
+               <retailDoc:annotation>
+                  <retailDoc:documentation>Unique identifier for the item.</retailDoc:documentation>
+               </retailDoc:annotation>
+            </xs:element>
+            <xs:element name="ticket_type_id" type="varchar24">
+               <retailDoc:annotation>
+                  <retailDoc:documentation>This field uniquely identifies the ticket type which is associated with the item.</retailDoc:documentation>
+               </retailDoc:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="ticket_type_desc" type="varchar2120">
+               <retailDoc:annotation>
+                  <retailDoc:documentation>This field contains a description of the ticket or label type.</retailDoc:documentation>
+               </retailDoc:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="sel_ind" type="varchar21">
+               <retailDoc:annotation>
+                  <retailDoc:documentation>Indicates if the ticket type is a shelf edge label.</retailDoc:documentation>
+               </retailDoc:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="po_print_type" type="varchar21">
+               <retailDoc:annotation>
+                  <retailDoc:documentation>This field indicates when the ticket type for the given item should be printed by default, upon the approval or receipt of the purchase order. Valid values are: A and R.</retailDoc:documentation>
+               </retailDoc:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="print_on_pc_ind" type="varchar21">
+               <retailDoc:annotation>
+                  <retailDoc:documentation>This field indicates whether or not this type of ticket should be printed for this item when a permanent price change goes into effect. Valid values in this field are:Y - Yes N - No.</retailDoc:documentation>
+               </retailDoc:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="ticket_over_pct" type="number12_4">
+               <retailDoc:annotation>
+                  <retailDoc:documentation>This field contains a percent which indicates the amount of tickets which should be printed for a given event. If the event causing tickets to be printed is approving or receiving a purchase order, then this field indicates the quantity of tickets which should be printed greater than the quantity of the purchase order. If the event causing the tickets to be printed is a permanent price change, this field would indicate the quantity of tickets which should be printed greater than the stock on hand.</retailDoc:documentation>
+               </retailDoc:annotation>
+            </xs:element>
+            <xs:element maxOccurs="unbounded" minOccurs="0" ref="TicketTypeDtl">
+               <retailDoc:annotation>
+                  <retailDoc:documentation>It's a referenced element. For detailed description, please refer referenced element doc.</retailDoc:documentation>
+               </retailDoc:annotation>
+            </xs:element>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:simpleType name="varchar225">
+      <retailDoc:annotation>
+         <retailDoc:documentation>This type can hold a string of max length of 25 characters.</retailDoc:documentation>
+      </retailDoc:annotation>
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="25"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="varchar24">
+      <retailDoc:annotation>
+         <retailDoc:documentation>This type can hold a string of max length of 4 characters.</retailDoc:documentation>
+      </retailDoc:annotation>
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="4"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="varchar2120">
+      <retailDoc:annotation>
+         <retailDoc:documentation>This type can hold a string of max length of 120 characters.</retailDoc:documentation>
+      </retailDoc:annotation>
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="120"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="varchar21">
+      <retailDoc:annotation>
+         <retailDoc:documentation>This type can hold a string of max length of 1 characters.</retailDoc:documentation>
+      </retailDoc:annotation>
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="1"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="number12_4">
+      <retailDoc:annotation>
+         <retailDoc:documentation>This type can hold a number of digits count 12 and fraction digit count of 4.</retailDoc:documentation>
+      </retailDoc:annotation>
+      <xs:restriction base="xs:decimal">
+         <xs:totalDigits value="12"/>
+         <xs:fractionDigits value="4"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="varchar2250">
+      <retailDoc:annotation>
+         <retailDoc:documentation>This type can hold a string of max length of 250 characters.</retailDoc:documentation>
+      </retailDoc:annotation>
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="250"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="number5">
+      <retailDoc:annotation>
+         <retailDoc:documentation>This type can hold a number of digits count 5.</retailDoc:documentation>
+      </retailDoc:annotation>
+      <xs:restriction base="xs:int">
+         <xs:totalDigits value="5"/>
+      </xs:restriction>
+   </xs:simpleType>
+</xs:schema>

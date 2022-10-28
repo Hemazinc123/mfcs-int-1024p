@@ -1,0 +1,8 @@
+<ItemUPCRef
+	xmlns="http://www.oracle.com/retail/integration/base/bo/ItemUPCRef/v1"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.oracle.com/retail/integration/base/bo/ItemUPCRef/v1 http://www.oracle.com/retail/integration/base/bo/ItemUPCRef/v1/ItemUPCRef.xsd ">
+	<ns1:ItemRef
+		xmlns:ns1="http://www.oracle.com/retail/integration/base/bo/ItemRef/v1">
+		<ns1:item>MXnHuvZgrHHwOETtKyvAuæ±</ns1:item>
+	</ns1:ItemRef>
+</ItemUPCRef>

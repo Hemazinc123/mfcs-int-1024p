@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:file="http://www.mulesoft.org/schema/mule/file" xmlns:json="http://www.mulesoft.org/schema/mule/json"
+	xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns:module-eventlogger="http://www.mulesoft.org/schema/mule/module-eventlogger" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/module-eventlogger http://www.mulesoft.org/schema/mule/module-eventlogger/current/mule-module-eventlogger.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd
+http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd">
+	<module-eventlogger:config name="EventLogger_Config" doc:name="EventLogger Config" doc:id="32f4789a-27d1-4f28-8a91-d624d84e076a" />
+	<file:config name="File_Config" doc:name="File Config" doc:id="3622ff5c-9c1c-4d8c-978f-b342a6735951" >
+		<file:connection workingDir="${file.path}" />
+	</file:config>
+	<flow name="sf-post-ISCDim" doc:id="71f58302-0bb2-4a9c-bad6-6135152a8954" >
+		<module-eventlogger:logger doc:id="c2955ad8-dc70-48c4-a5ea-284219fc994b" config-ref="EventLogger_Config" doc:name="START:Logger" message="START: Logging Event at sf-post-ISCDim" apiFlowName="sf-post-ISCDim"/>
+		<ee:transform doc:name="DW:XML TO JSON" doc:id="503a5f29-7915-485a-9209-97efcd520658" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+ISCDimDesc:
+{
+item:payload.ISCDimDesc.item,
+supplier:payload.ISCDimDesc.supplier,
+origin_country:payload.ISCDimDesc.origin_country,
+dim_object:payload.ISCDimDesc.dim_object,
+object_desc:payload.ISCDimDesc.object_desc,
+presentation_method:payload.ISCDimDesc.presentation_method,
+method_desc:payload.ISCDimDesc.method_desc,
+length:payload.ISCDimDesc.length as Number,
+width:payload.ISCDimDesc.width as Number,
+height:payload.ISCDimDesc.height as Number,
+lwh_uom:payload.ISCDimDesc.lwh_uom,
+weight:payload.ISCDimDesc.weight as Number,
+net_weight:payload.ISCDimDesc.net_weight as Number,
+weight_uom:payload.ISCDimDesc.weight_uom,
+liquid_volume:payload.ISCDimDesc.liquid_volume as Number,
+liquid_volume_uom:payload.ISCDimDesc.liquid_volume_uom,
+stat_cube:payload.ISCDimDesc.stat_cube as Number,
+tare_weight:payload.ISCDimDesc.tare_weight as Number,
+tare_type: payload.ISCDimDesc.tare_type
+
+},}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<json:validate-schema doc:id="f8958c4d-720c-4bd3-a168-91e2b8549ab7" schema="jsonschemas/ISCDimDesc.schema.json"/>
+		<module-eventlogger:logger doc:name="DEBUG:Logger" doc:id="f59ca315-1009-47aa-86e6-132552853e83" config-ref="EventLogger_Config" message="DEBUG: Logging Event at sf-post-ISCDimcre" apiFlowName="sf-post-ISCDim" />
+		<file:write doc:id="2153041c-4a0e-4789-bb98-1ffc597677fe" config-ref="File_Config" doc:name="Write ISCDIM Cre" path="#[vars.vRequest ++ &quot;-&quot; ++ (now() as String {format:'dd-MM-yy'}) ++ '.json']"/>
+		<module-eventlogger:logger doc:name="END:Logger" doc:id="730dfb1c-f45b-4d7c-aa41-9ecb736ff2f2" config-ref="EventLogger_Config" message="END: Logging Event at sf-post-ISCDim" apiFlowName="sf-post-ISCDim" />
+	</flow>
+	<flow name="Sf-ISCDimMod" doc:id="ed186e9c-67ab-480a-a5e9-447ee0313b3d">
+		<module-eventlogger:logger doc:name="START:Logger" doc:id="07c4f323-7d14-488b-8e66-962515148728" config-ref="EventLogger_Config" message="START:Logging Event at " apiFlowName="Sf-ISCDimMod"/>
+		<ee:transform doc:name="Transform Message" doc:id="8c8a4867-7268-415e-bc8a-b44eae09e186" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+ns ns1 http://www.oracle.com/retail/integration/base/bo/ISCDimDesc/v1
+---
+{
+	"ISCDimDesc": {
+		item: payload.ns1#ISCDimDesc.item,
+		supplier: payload.ns1#ISCDimDesc.supplier,
+		origin_country: payload.ns1#ISCDimDesc.origin_country,
+		dim_object: payload.ns1#ISCDimDesc.dim_object,
+		object_desc: payload.ns1#ISCDimDesc.object_desc,
+		presentation_method: payload.ns1#ISCDimDesc.presentation_method,
+		method_desc: payload.ns1#ISCDimDesc.method_desc,
+		length: payload.ns1#ISCDimDesc.length as Number,
+		width: payload.ns1#ISCDimDesc.width as Number,
+		height: payload.ns1#ISCDimDesc.height as Number,
+		lwh_uom: payload.ns1#ISCDimDesc.lwh_uom,
+		weight: payload.ns1#ISCDimDesc.weight as Number,
+		net_weight: payload.ns1#ISCDimDesc.net_weight as Number,
+		weight_uom: payload.ns1#ISCDimDesc.weight_uom,
+		liquid_volume: payload.ns1#ISCDimDesc.liquid_volume as Number,
+		liquid_volume_uom: payload.ns1#ISCDimDesc.liquid_volume_uom,
+		stat_cube: payload.ns1#ISCDimDesc.stat_cube as Number,
+		tare_weight: payload.ns1#ISCDimDesc.tare_weight as Number,
+		tare_type: payload.ns1#ISCDimDesc.tare_type
+	}
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<json:validate-schema doc:name="Validate schema" doc:id="334c8745-e829-4e94-8742-f2942115f154" schema="jsonschemas/ISCDimDesc.schema.json"/>
+		<module-eventlogger:logger doc:name="DEBUG:Logger" doc:id="1677dcaf-88d0-43a8-a0c4-d18322808342" config-ref="EventLogger_Config" message="DEBUG:Logging Event at " apiFlowName="Sf-ISCDimMod" />
+		<file:write doc:name="Write ISCDim Mod" doc:id="2a22b0ed-44e3-4c9c-84d9-7d129deb69a2" config-ref="File_Config" path="#[vars.vRequest ++ &quot;-&quot; ++ (now() as String {format:'dd-MM-yy'}) ++ '.json']"/>
+		<module-eventlogger:logger doc:name="END:Logger" doc:id="a93b4d43-f485-4fcc-bcf9-65f5b513d971" config-ref="EventLogger_Config" message="END:Logging Event at " apiFlowName="Sf-ISCDimMod" />
+	</flow>
+	<flow name="sf-ISCDimDel" doc:id="4c046e59-b647-4ed5-9468-427050f895a8">
+		<module-eventlogger:logger doc:name="START:Logger" doc:id="41a0f6ed-764d-4302-8e27-7df78829dd99" config-ref="EventLogger_Config" message="START: Logging Event at sf-ISCDimDel" apiFlowName="sf-ISCDimDel"/>
+		<ee:transform doc:name="DW:XML TO JSON" doc:id="9ab26070-cac8-47bc-8d40-2d97ea1d394d" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+ns ns1 http://www.oracle.com/retail/integration/base/bo/ISCDimRef/v1
+---
+{
+	"ISCDimRef": {
+		item: payload.ns1#ISCDimRef.item,
+		supplier: payload.ns1#ISCDimRef.supplier,
+		origin_country: payload.ns1#ISCDimRef.origin_country,
+		dim_object: payload.ns1#ISCDimRef.dim_object,
+	}
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<json:validate-schema doc:name="Validate schema" doc:id="230fc24e-2655-4cb0-b720-5858d6b28066" schema="jsonschemas/ISCDimRef.schema.json"/>
+		<module-eventlogger:logger doc:name="DEBUG:Logger" doc:id="634d5c58-9f8e-4874-8dd9-b1483a1a6f84" config-ref="EventLogger_Config" message="DEBUG: Logging Event at sf-ISCDimDel" apiFlowName="sf-ISCDimDel" />
+		<file:write doc:name="Write ISCDimDel" doc:id="5fb1d96c-0e58-4970-ac72-da505581b28d" config-ref="File_Config" path="#[vars.vRequest ++ &quot;-&quot; ++ (now() as String {format:'dd-MM-yy'}) ++ '.json']"/>
+		<module-eventlogger:logger doc:name="END:Logger" doc:id="9da65656-9cb0-4682-ae9e-96e6e01d4d36" config-ref="EventLogger_Config" message="END: Logging Event at sf-ISCDimDel" apiFlowName="sf-ISCDimDel" />
+	</flow>
+</mule>

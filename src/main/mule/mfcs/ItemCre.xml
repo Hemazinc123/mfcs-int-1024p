@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:file="http://www.mulesoft.org/schema/mule/file" xmlns:json="http://www.mulesoft.org/schema/mule/json"
+	xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns:module-eventlogger="http://www.mulesoft.org/schema/mule/module-eventlogger" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/module-eventlogger http://www.mulesoft.org/schema/mule/module-eventlogger/current/mule-module-eventlogger.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd
+http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd">
+	<flow name="sf-post-ItemCre" doc:id="71f58302-0bb2-4a9c-bad6-6135152a8954" >
+		<module-eventlogger:logger doc:id="c2955ad8-dc70-48c4-a5ea-284219fc994b" doc:name="START:Logger" message="START: Logging Event at sf-post-ItemCre" apiFlowName="sf-post-ItemCre"/>
+		<ee:transform doc:name="DW:XML TO JSON" doc:id="503a5f29-7915-485a-9209-97efcd520658" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+ns ns1 http://www.oracle.com/retail/integration/base/bo/ItemHdrDesc/v1
+ns ns2 http://www.oracle.com/retail/integration/base/bo/ItemSupDesc/v1
+ns ns3 http://www.oracle.com/retail/integration/base/bo/ItemSupCtyDesc/v1
+ns ns4 http://www.oracle.com/retail/integration/base/bo/ItemSupCtyMfrDesc/v1
+ns ns5 http://www.oracle.com/retail/integration/base/bo/ISCDimDesc/v1
+ns ns6 http://www.oracle.com/retail/integration/base/bo/VatItemDesc/v1
+ns ns7 http://www.oracle.com/retail/integration/base/bo/ItemSupUomDesc/v1
+ns ns8 http://www.oracle.com/retail/integration/base/bo/ItemUDALOVDesc/v1
+ns ns9  http://www.oracle.com/retail/integration/base/bo/ItemUDAFFDesc/v1
+ns ns10 http://www.oracle.com/retail/integration/base/bo/ItemBOMDesc/v1
+ns ns11 http://www.oracle.com/retail/integration/base/bo/ItemUPCDesc/v1
+ns ns12 http://www.oracle.com/retail/integration/base/bo/RelatedItemDesc/v1
+---
+{
+	ItemDesc: {
+		ItemHdrDesc: {
+			item: payload.ItemDesc.ns1#ItemHdrDesc.item,
+			item_number_type: payload.ItemDesc.ns1#ItemHdrDesc.item_number_type,
+			format_id: payload.ItemDesc.ns1#ItemHdrDesc.format_id,
+			prefix: payload.ItemDesc.ns1#ItemHdrDesc.prefix as Number,
+			item_parent: payload.ItemDesc.ns1#ItemHdrDesc.item_parent,
+			item_grandparent: payload.ItemDesc.ns1#ItemHdrDesc.item_grandparent,
+			pack_ind: payload.ItemDesc.ns1#ItemHdrDesc.pack_ind,
+			item_level: payload.ItemDesc.ns1#ItemHdrDesc.item_level as Number,
+			tran_level: payload.ItemDesc.ns1#ItemHdrDesc.tran_level as Number,
+			diff_1: payload.ItemDesc.ns1#ItemHdrDesc.diff_1,
+			diff_1_type: payload.ItemDesc.ns1#ItemHdrDesc.diff_1_type,
+			diff_2: payload.ItemDesc.ns1#ItemHdrDesc.diff_2,
+			diff_2_type: payload.ItemDesc.ns1#ItemHdrDesc.diff_2_type,
+			diff_3: payload.ItemDesc.ns1#ItemHdrDesc.diff_3,
+			diff_3_type: payload.ItemDesc.ns1#ItemHdrDesc.diff_3_type,
+			diff_4: payload.ItemDesc.ns1#ItemHdrDesc.diff_4,
+			diff_4_type: payload.ItemDesc.ns1#ItemHdrDesc.diff_4_type,
+			dept: payload.ItemDesc.ns1#ItemHdrDesc.dept as Number,
+			dept_name: payload.ItemDesc.ns1#ItemHdrDesc.dept_name,
+			class: payload.ItemDesc.ns1#ItemHdrDesc.class,
+			class_name: payload.ItemDesc.ns1#ItemHdrDesc.class_name,
+			subclass: payload.ItemDesc.ns1#ItemHdrDesc.subclass,
+			sub_name: payload.ItemDesc.ns1#ItemHdrDesc.sub_name,
+			status: payload.ItemDesc.ns1#ItemHdrDesc.status,
+			item_desc: payload.ItemDesc.ns1#ItemHdrDesc.item_desc,
+			short_desc: payload.ItemDesc.ns1#ItemHdrDesc.short_desc,
+			desc_up: payload.ItemDesc.ns1#ItemHdrDesc.desc_up,
+			primary_ref_item_ind: payload.ItemDesc.ns1#ItemHdrDesc.primary_ref_item_ind,
+			cost_zone_group_id: payload.ItemDesc.ns1#ItemHdrDesc.cost_zone_group_id as Number,
+			standard_uom: payload.ItemDesc.ns1#ItemHdrDesc.standard_uom,
+			uom_conv_factor: payload.ItemDesc.ns1#ItemHdrDesc.uom_conv_factor as Number,
+			package_size: payload.ItemDesc.ns1#ItemHdrDesc.package_size as Number,
+			package_uom: payload.ItemDesc.ns1#ItemHdrDesc.package_uom,
+			merchandise_ind: payload.ItemDesc.ns1#ItemHdrDesc.merchandise_ind,
+			store_ord_mult: payload.ItemDesc.ns1#ItemHdrDesc.store_ord_mult,
+			forecast_ind: payload.ItemDesc.ns1#ItemHdrDesc.forecast_ind,
+			mfg_rec_retail: payload.ItemDesc.ns1#ItemHdrDesc.mfg_rec_retail as Number,
+			retail_label_type: payload.ItemDesc.ns1#ItemHdrDesc.retail_label_type,
+			retail_label_value: payload.ItemDesc.ns1#ItemHdrDesc.retail_label_value as Number,
+			handling_temp: payload.ItemDesc.ns1#ItemHdrDesc.handling_temp,
+			handling_temp_desc: payload.ItemDesc.ns1#ItemHdrDesc.handling_temp_desc,
+			handling_sensitivity: payload.ItemDesc.ns1#ItemHdrDesc.handling_sensitivity,
+			catch_weight_ind: payload.ItemDesc.ns1#ItemHdrDesc.catch_weight_ind,
+			waste_type: payload.ItemDesc.ns1#ItemHdrDesc.waste_type,
+			waste_type_desc: payload.ItemDesc.ns1#ItemHdrDesc.waste_type_desc,
+			waste_pct: payload.ItemDesc.ns1#ItemHdrDesc.waste_pct as Number,
+			default_waste_pct: payload.ItemDesc.ns1#ItemHdrDesc.default_waste_pct as Number,
+			const_dimen_ind: payload.ItemDesc.ns1#ItemHdrDesc.const_dimen_ind,
+			simple_pack_ind: payload.ItemDesc.ns1#ItemHdrDesc.simple_pack_ind,
+			contains_inner_ind: payload.ItemDesc.ns1#ItemHdrDesc.contains_inner_ind,
+			sellable_ind: payload.ItemDesc.ns1#ItemHdrDesc.sellable_ind,
+			orderable_ind: payload.ItemDesc.ns1#ItemHdrDesc.orderable_ind,
+			pack_type: payload.ItemDesc.ns1#ItemHdrDesc.pack_type,
+			order_as_type: payload.ItemDesc.ns1#ItemHdrDesc.order_as_type,
+			comments: payload.ItemDesc.ns1#ItemHdrDesc.comments,
+			unit_retail: payload.ItemDesc.ns1#ItemHdrDesc.unit_retail as Number,
+			item_service_level: payload.ItemDesc.ns1#ItemHdrDesc.item_service_level,
+			gift_wrap_ind: payload.ItemDesc.ns1#ItemHdrDesc.gift_wrap_ind,
+			ship_alone_ind: payload.ItemDesc.ns1#ItemHdrDesc.ship_alone_ind,
+			perishable_ind: payload.ItemDesc.ns1#ItemHdrDesc.perishable_ind,
+			item_length: payload.ItemDesc.ns1#ItemHdrDesc.item_length as Number,
+			item_length: payload.ItemDesc.ns1#ItemHdrDesc.item_length as Number,
+			item_length: payload.ItemDesc.ns1#ItemHdrDesc.item_length as Number,
+			item_length: payload.ItemDesc.ns1#ItemHdrDesc.item_length as Number,
+			item_length: payload.ItemDesc.ns1#ItemHdrDesc.item_length as Number,
+			item_length: payload.ItemDesc.ns1#ItemHdrDesc.item_length as Number,
+			item_length: payload.ItemDesc.ns1#ItemHdrDesc.item_length as Number,
+			item_width: payload.ItemDesc.ns1#ItemHdrDesc.item_width as Number,
+			item_height: payload.ItemDesc.ns1#ItemHdrDesc.item_height as Number,
+			item_weight: payload.ItemDesc.ns1#ItemHdrDesc.item_weight as Number,
+			item_cube: payload.ItemDesc.ns1#ItemHdrDesc.item_cube as Number,
+			item_xform_ind: payload.ItemDesc.ns1#ItemHdrDesc.item_xform_ind,
+			inventory_ind: payload.ItemDesc.ns1#ItemHdrDesc.inventory_ind,
+			order_type: payload.ItemDesc.ns1#ItemHdrDesc.order_type,
+			sale_type: payload.ItemDesc.ns1#ItemHdrDesc.sale_type,
+			deposit_item_type: payload.ItemDesc.ns1#ItemHdrDesc.deposit_item_type,
+			container_item: payload.ItemDesc.ns1#ItemHdrDesc.container_item,
+			deposit_in_price_per_uom: payload.ItemDesc.ns1#ItemHdrDesc.deposit_in_price_per_uom,
+			notional_pack_ind: payload.ItemDesc.ns1#ItemHdrDesc.notional_pack_ind,
+			soh_inquiry_at_pack_ind: payload.ItemDesc.ns1#ItemHdrDesc.soh_inquiry_at_pack_ind,
+			purchase_type: payload.ItemDesc.ns1#ItemHdrDesc.purchase_type,
+			product_classification: payload.ItemDesc.ns1#ItemHdrDesc.product_classification
+		},
+		ItemSupDesc: payload.ItemDesc.*ns2#ItemSupDesc map (ItemSupDesc, indexOfItemSupDesc)-> {
+			item: ItemSupDesc.ns2#item,
+			supplier: ItemSupDesc.ns2#supplier,
+			primary_supp_ind: ItemSupDesc.ns2#primary_supp_ind,
+			pallet_name: ItemSupDesc.ns2#pallet_name,
+			case_name: ItemSupDesc.ns2#case_name,
+			inner_name: ItemSupDesc.ns2#inner_name,
+			direct_ship_ind: ItemSupDesc.ns2#direct_ship_ind
+		},
+		ItemSupCtyDesc: payload.ItemDesc.*ns3#ItemSupCtyDesc map (ItemSupCtyDesc, indexOfItemSupCtyDesc)-> {
+			item: ItemSupCtyDesc.ns3#item,
+			supplier: ItemSupCtyDesc.ns3#supplier,
+			origin_country_id: ItemSupCtyDesc.ns3#origin_country_id,
+			primary_supp_ind: ItemSupCtyDesc.ns3#primary_supp_ind,
+			primary_country_ind: ItemSupCtyDesc.ns3#primary_country_ind,
+			unit_cost: ItemSupCtyDesc.ns3#unit_cost as Number,
+			supp_pack_size: ItemSupCtyDesc.ns3#supp_pack_size as Number,
+			inner_pack_size: ItemSupCtyDesc.ns3#inner_pack_size as Number,
+			round_lvl: ItemSupCtyDesc.ns3#round_lvl,
+			min_order_qty: ItemSupCtyDesc.ns3#min_order_qty as Number,
+			ti: ItemSupCtyDesc.ns3#ti as Number,
+			hi: ItemSupCtyDesc.ns3#hi as Number,
+			cost_uom: ItemSupCtyDesc.ns3#cost_uom
+		},
+		ItemSupCtyMfrDesc: payload.ItemDesc.*ns4#ItemSupCtyMfrDesc map (ItemSupCtyMfrDesc, indexOfItemSupCtyMfrDesc)-> {
+			item: ItemSupCtyMfrDesc.ns4#item,
+			supplier: ItemSupCtyMfrDesc.ns4#supplier as Number,
+			manufacturer_ctry_id: ItemSupCtyMfrDesc.ns4#manufacturer_ctry_id,
+			primary_manufacturer_ctry_ind: ItemSupCtyMfrDesc.ns4#primary_manufacturer_ctry_ind
+		},
+		ISCDimDesc: payload.ItemDesc.*ns5#ISCDimDesc map (ISCDimDesc, indexOfISCDimDesc)-> {
+			item: ISCDimDesc.ns5#item,
+			supplier: ISCDimDesc.ns5#supplier,
+			origin_country: ISCDimDesc.ns5#origin_country,
+			dim_object: ISCDimDesc.ns5#dim_object,
+			object_desc: ISCDimDesc.ns5#object_desc,
+			presentation_method: ISCDimDesc.ns5#presentation_method,
+			method_desc: ISCDimDesc.ns5#method_desc,
+			length: ISCDimDesc.ns5#length as Number,
+			width: ISCDimDesc.ns5#width as Number,
+			height: ISCDimDesc.ns5#height as Number,
+			lwh_uom: ISCDimDesc.ns5#lwh_uom,
+			weight: ISCDimDesc.ns5#weight as Number,
+			net_weight: ISCDimDesc.ns5#net_weight as Number,
+			weight_uom: ISCDimDesc.ns5#weight_uom,
+			liquid_volume: ISCDimDesc.ns5#liquid_volume as Number,
+			liquid_volume_uom: ISCDimDesc.ns5#liquid_volume_uom,
+			stat_cube: ISCDimDesc.ns5#stat_cube as Number,
+			tare_weight: ISCDimDesc.ns5#tare_weight as Number,
+			tare_type: ISCDimDesc.ns5#tare_type
+		},
+		VatItemDesc: payload.ItemDesc.*ns6#VatItemDesc map (VatItemDesc, indexOfVatItemDesc)-> {
+			item: VatItemDesc.ns6#item,
+			active_date: VatItemDesc.ns6#active_date as Date,
+			vat_type: VatItemDesc.ns6#vat_type,
+			vat_code: VatItemDesc.ns6#vat_code,
+			vat_rate: VatItemDesc.ns6#vat_rate as Number,
+			vat_region: 1,
+			reverse_vat_ind: VatItemDesc.ns6#reverse_vat_ind
+		},
+		ItemSupUomDesc: payload.ItemDesc.*ns7#ItemSupUomDesc map (ItemSupUomDesc, indexOfItemSupUomDesc)-> {
+			item: ItemSupUomDesc.ns7#item,
+			supplier: ItemSupUomDesc.ns7#supplier as Number,
+			uom: ItemSupUomDesc.ns7#uom,
+			value: ItemSupUomDesc.ns7#value as Number,
+		},
+		ItemUDALOVDesc: payload.ItemDesc.*ns8#ItemUDALOVDesc map (ItemUDALOVDesc, indexOFItemUDALOVDesc) -> {
+			item: ItemUDALOVDesc.ns8#item,
+			uda_id: ItemUDALOVDesc.ns8#uda_id as Number,
+			uda_value: ItemUDALOVDesc.ns8#uda_value
+		},
+		ItemUDAFFDesc: payload.ItemDesc.*ns9#ItemUDAFFDesc map (ItemUDAFFDesc, indexOfItemUDAFFDesc)-> {
+			item: ItemUDAFFDesc.ns9#item,
+			uda_id: ItemUDAFFDesc.ns9#uda_id as Number,
+			uda_text: ItemUDAFFDesc.ns9#uda_text
+		},
+		ItemBOMDesc: payload.ItemDesc.*ns10#ItemBOMDesc map (ItemBOMDesc, indexOfItemBOMDesc)-> {
+			pack_no: ItemBOMDesc.ns10#pack_no,
+			item: ItemBOMDesc.ns10#item,
+			pack_qty: ItemBOMDesc.ns10#pack_qty as Number
+		},
+		ItemUPCDesc: payload.ItemDesc.*ns11#ItemUPCDesc map (ItemUPCDesc, indexOfItemUPCDesc)-> {
+			item_id: ItemUPCDesc.ns11#item_id,
+			item_parent: ItemUPCDesc.ns11#item_parent,
+			primary_ref_item_ind: ItemUPCDesc.ns11#primary_ref_item_ind,
+			format_id: ItemUPCDesc.ns11#format_id,
+			prefix: ItemUPCDesc.ns11#prefix as Number,
+			item_number_type: ItemUPCDesc.ns11#item_number_type
+		},
+		RelatedItemDesc: payload.ItemDesc.*ns12#RelatedItemDesc map (RelatedItemDesc, indexOfRelatedItemDesc)-> {
+			item: RelatedItemDesc.ns12#item,
+			relationship_id: RelatedItemDesc.ns12#relationship_id as Number,
+			relationship_name: RelatedItemDesc.ns12#relationship_name,
+			relationship_type: RelatedItemDesc.ns12#relationship_type,
+			mandatory_ind: RelatedItemDesc.ns12#mandatory_ind
+		}
+	}
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<json:validate-schema doc:id="f8958c4d-720c-4bd3-a168-91e2b8549ab7" schema="jsonschemas/ItemDesc.schema.json"/>
+		<module-eventlogger:logger doc:name="DEBUG:Logger" doc:id="f59ca315-1009-47aa-86e6-132552853e83" message="DEBUG: Logging Event at sf-post-ItemCre" apiFlowName="sf-post-ItemCre" />
+		<file:write doc:id="2153041c-4a0e-4789-bb98-1ffc597677fe" doc:name="Write ItemCre" path="#[vars.vRequest ++ &quot;-&quot; ++ (now() as String {format:'dd-MM-yy'}) ++ '.json']" config-ref="File_Config"/>
+		<module-eventlogger:logger doc:name="END:Logger" doc:id="730dfb1c-f45b-4d7c-aa41-9ecb736ff2f2" message="END: Logging Event at sf-post-ItemCre" apiFlowName="sf-post-ItemCre" />
+	</flow>
+	<flow name="Sf-ItemHdrMod" doc:id="ed186e9c-67ab-480a-a5e9-447ee0313b3d">
+		<module-eventlogger:logger doc:name="START:Logger" doc:id="07c4f323-7d14-488b-8e66-962515148728" message="START:Logging Event at Sf-ItemHdrMod" apiFlowName="Sf-ItemHdrMod"/>
+		<ee:transform doc:name="DW:XML TO JSON" doc:id="8c8a4867-7268-415e-bc8a-b44eae09e186" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+ns ns1 http://www.oracle.com/retail/integration/base/bo/ItemHdrDesc/v1
+---
+{
+	"CustFlexAttriVo": {
+		"name": "attribute_name"
+	},
+	"ItemHdrDesc": {
+		"item": payload.ns1#ItemHdrDesc.item,
+		"item_number_type": payload.ns1#ItemHdrDesc.item_number_type,
+		"format_id": payload.ns1#ItemHdrDesc.format_id,
+		"prefix": payload.ns1#ItemHdrDesc.prefix as Number,
+		"item_parent": payload.ns1#ItemHdrDesc.item_parent,
+		"item_grandparent": payload.ns1#ItemHdrDesc.item_grandparent,
+		"pack_ind": payload.ns1#ItemHdrDesc.pack_ind,
+		"item_level": payload.ns1#ItemHdrDesc.item_level as Number,
+		"tran_level": payload.ns1#ItemHdrDesc.tran_level as Number,
+		"diff_1": payload.ns1#ItemHdrDesc.diff_1,
+		"diff_1_type": payload.ns1#ItemHdrDesc.diff_1_type,
+		"diff_2": payload.ns1#ItemHdrDesc.diff_2,
+		"diff_2_type": payload.ns1#ItemHdrDesc.diff_2_type,
+		"diff_3": payload.ns1#ItemHdrDesc.diff_3,
+		"diff_3_type": payload.ns1#ItemHdrDesc.diff_3_type,
+		"diff_4": payload.ns1#ItemHdrDesc.diff_4,
+		"diff_4_type": payload.ns1#ItemHdrDesc.diff_4_type,
+		"dept": payload.ns1#ItemHdrDesc.dept as Number,
+		"dept_name": payload.ns1#ItemHdrDesc.dept_name,
+		"class": payload.ns1#ItemHdrDesc.class,
+		"class_name": payload.ns1#ItemHdrDesc.class_name,
+		"subclass": payload.ns1#ItemHdrDesc.subclass,
+		"sub_name": payload.ns1#ItemHdrDesc.sub_name,
+		"status": payload.ns1#ItemHdrDesc.status,
+		"item_desc": payload.ns1#ItemHdrDesc.item_desc,
+		"short_desc": payload.ns1#ItemHdrDesc.short_desc,
+		"desc_up": payload.ns1#ItemHdrDesc.desc_up,
+		"primary_ref_item_ind": payload.ns1#ItemHdrDesc.primary_ref_item_ind,
+		"cost_zone_group_id": payload.ns1#ItemHdrDesc.cost_zone_group_id as Number,
+		"standard_uom": payload.ns1#ItemHdrDesc.standard_uom,
+		"uom_conv_factor": payload.ns1#ItemHdrDesc.uom_conv_factor as Number,
+		"package_size": payload.ns1#ItemHdrDesc.package_size as Number,
+		"package_uom": payload.ns1#ItemHdrDesc.package_uom,
+		"merchandise_ind": payload.ns1#ItemHdrDesc.merchandise_ind,
+		"store_ord_mult": payload.ns1#ItemHdrDesc.store_ord_mult,
+		"forecast_ind": payload.ns1#ItemHdrDesc.forecast_ind,
+		"mfg_rec_retail": payload.ns1#ItemHdrDesc.mfg_rec_retail as Number,
+		"retail_label_type": payload.ns1#ItemHdrDesc.retail_label_type,
+		"retail_label_value": payload.ns1#ItemHdrDesc.retail_label_value as Number,
+		"handling_temp": payload.ns1#ItemHdrDesc.handling_temp,
+		"handling_temp_desc": payload.ns1#ItemHdrDesc.handling_temp_desc,
+		"handling_sensitivity": payload.ItemHdrDesc.handling_sensitivity,
+		"catch_weight_ind": payload.ns1#ItemHdrDesc.catch_weight_ind,
+		"waste_type": payload.ItemHdrDesc.waste_type,
+		"waste_type_desc": payload.ns1#ItemHdrDesc.waste_type_desc,
+		"waste_pct": payload.ns1#ItemHdrDesc.waste_pct as Number,
+		"default_waste_pct": payload.ns1#ItemHdrDesc.default_waste_pct as Number,
+		"const_dimen_ind": payload.ns1#ItemHdrDesc.const_dimen_ind,
+		"simple_pack_ind": payload.ns1#ItemHdrDesc.simple_pack_ind,
+		"contains_inner_ind": payload.ns1#ItemHdrDesc.contains_inner_ind,
+		"sellable_ind": payload.ns1#ItemHdrDesc.sellable_ind,
+		"orderable_ind": payload.ns1#ItemHdrDesc.orderable_ind,
+		"pack_type": payload.ItemHdrDesc.pack_type,
+		"order_as_type": payload.ns1#ItemHdrDesc.order_as_type,
+		"comments": payload.ItemHdrDesc.comments,
+		"unit_retail": payload.ns1#ItemHdrDesc.unit_retail as Number,
+		"item_service_level": payload.ns1#ItemHdrDesc.item_service_level,
+		"gift_wrap_ind": payload.ns1#ItemHdrDesc.gift_wrap_ind,
+		"ship_alone_ind": payload.ns1#ItemHdrDesc.ship_alone_ind,
+		"perishable_ind": payload.ns1#ItemHdrDesc.perishable_ind,
+		"item_length": payload.ns1#ItemHdrDesc.item_length as Number,
+		"item_width": payload.ns1#ItemHdrDesc.item_width as Number,
+		"item_height": payload.ns1#ItemHdrDesc.item_height as Number,
+		"item_weight": payload.ns1#ItemHdrDesc.item_weight as Number,
+		"item_cube": payload.ns1#ItemHdrDesc.item_cube as Number,
+		"item_xform_ind": payload.ns1#ItemHdrDesc.item_xform_ind,
+		"inventory_ind": payload.ns1#ItemHdrDesc.inventory_ind,
+		"order_type": payload.ns1#ItemHdrDesc.order_type,
+		"sale_type": payload.ns1#ItemHdrDesc.sale_type,
+		"deposit_item_type": payload.ns1#ItemHdrDesc.deposit_item_type,
+		"container_item": payload.ns1#ItemHdrDesc.container_item,
+		"deposit_in_price_per_uom": payload.ns1#ItemHdrDesc.deposit_in_price_per_uom,
+		"notional_pack_ind": payload.ns1#ItemHdrDesc.notional_pack_ind,
+		"soh_inquiry_at_pack_ind": payload.ns1#ItemHdrDesc.soh_inquiry_at_pack_ind,
+		"purchase_type": payload.ns1#ItemHdrDesc.purchase_type,
+		"product_classification": payload.ns1#ItemHdrDesc.product_classification
+	}
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<json:validate-schema doc:name="Validate schema" doc:id="334c8745-e829-4e94-8742-f2942115f154" schema="jsonschemas/ItemDesc.schema.json"/>
+		<module-eventlogger:logger doc:name="DEBUG:Logger" doc:id="1677dcaf-88d0-43a8-a0c4-d18322808342" message="DEBUG:Logging Event at Sf-ItemHdrMod" apiFlowName="Sf-ItemHdrMod" />
+		<file:write doc:name="WriteItemHdrMod" doc:id="2a22b0ed-44e3-4c9c-84d9-7d129deb69a2" path="#[vars.vRequest ++ &quot;-&quot; ++ (now() as String {format:'dd-MM-yy'}) ++ '.json']" config-ref="File_Config"/>
+		<module-eventlogger:logger doc:name="END:Logger" doc:id="a93b4d43-f485-4fcc-bcf9-65f5b513d971" message="END:Logging Event at Sf-ItemHdrMod" apiFlowName="Sf-ItemHdrMod" />
+	</flow>
+	<flow name="sf-ItemDel" doc:id="4c046e59-b647-4ed5-9468-427050f895a8">
+		<module-eventlogger:logger doc:name="START:Logger" doc:id="41a0f6ed-764d-4302-8e27-7df78829dd99" message="START: Logging Event at sf-ItemDel" apiFlowName="sf-ItemDel"/>
+		<ee:transform doc:name="DW:XML TO JSON" doc:id="9ab26070-cac8-47bc-8d40-2d97ea1d394d" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+ns ns1 http://www.oracle.com/retail/integration/base/bo/ItemRef/v1
+---
+{
+	"ItemRef": {
+		item: payload.ns1#ItemRef.item
+	}
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<json:validate-schema doc:name="Validate schema" doc:id="230fc24e-2655-4cb0-b720-5858d6b28066" schema="jsonschemas/ItemRef.schema.json"/>
+		<module-eventlogger:logger doc:name="DEBUG:Logger" doc:id="634d5c58-9f8e-4874-8dd9-b1483a1a6f84" message="DEBUG: Logging Event at sf-ItemDel" apiFlowName="sf-ItemDel" />
+		<file:write doc:name="WriteItemDel" doc:id="5fb1d96c-0e58-4970-ac72-da505581b28d" path="#[vars.vRequest ++ &quot;-&quot; ++ (now() as String {format:'dd-MM-yy'}) ++ '.json']" config-ref="File_Config"/>
+		<module-eventlogger:logger doc:name="END:Logger" doc:id="9da65656-9cb0-4682-ae9e-96e6e01d4d36" message="END: Logging Event at sf- ItemDel" apiFlowName="sf-ItemDel" />
+	</flow>
+</mule>
