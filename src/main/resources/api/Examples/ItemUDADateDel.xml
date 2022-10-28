@@ -1,0 +1,7 @@
+<ItemUDADateRef
+	xmlns="http://www.oracle.com/retail/integration/base/bo/ItemUDADateRef/v1"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.oracle.com/retail/integration/base/bo/ItemUDADateRef/v1 http://www.oracle.com/retail/integration/base/bo/ItemUDADateRef/v1/ItemUDADateRef.xsd ">
+	<item>ZkQRcrJXQIdNeMqAkvtJoæ±</item>
+	<uda_id>5</uda_id>
+	<uda_date>2013-09-01T09:08:07</uda_date>
+</ItemUDADateRef>

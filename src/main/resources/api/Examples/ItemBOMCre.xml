@@ -1,0 +1,7 @@
+<ItemBOMDesc
+	xmlns="http://www.oracle.com/retail/integration/base/bo/ItemBOMDesc/v1"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.oracle.com/retail/integration/base/bo/ItemBOMDesc/v1 http://www.oracle.com/retail/integration/base/bo/ItemBOMDesc/v1/ItemBOMDesc.xsd ">
+	<pack_no>ytywdwZCrswVCOIJYnktDæ±</pack_no>
+	<item>mDxgCzOxiKOeHUFrScsGGæ±</item>
+	<pack_qty>12.4</pack_qty>
+</ItemBOMDesc>

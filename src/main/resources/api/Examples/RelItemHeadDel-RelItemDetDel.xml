@@ -1,0 +1,7 @@
+<RelatedItemRef
+	xmlns="http://www.oracle.com/retail/integration/base/bo/RelatedItemRef/v1"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.oracle.com/retail/integration/base/bo/RelatedItemRef/v1 http://www.oracle.com/retail/integration/base/bo/RelatedItemRef/v1/RelatedItemRef.xsd ">
+	<item>tCysJvzGtzcuaLCHmJLMFæ±</item>
+	<relationship_id>15</relationship_id>
+	<related_item>gyOZATYwfGUfMSCsaSKyræ±</related_item>
+</RelatedItemRef>

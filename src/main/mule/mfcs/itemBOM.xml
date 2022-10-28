@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:json="http://www.mulesoft.org/schema/mule/json"
+	xmlns:file="http://www.mulesoft.org/schema/mule/file"
+	xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd 
+http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd 
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
+	<flow name="sf-itemBOMCre" doc:id="45cfd180-9dd9-490c-959b-396647d2e604" >
+		<logger level="INFO" doc:name="Logger" doc:id="e5d352a8-073b-4ae7-88e3-b7429dfba75e" message="start logger of ItemBOMCre" />
+		<ee:transform doc:name="Transform Message" doc:id="b5e8ddd5-ba47-4c4a-a76c-e420eccd5706" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+ns ns1 http://www.oracle.com/retail/integration/base/bo/ItemBOMDesc/v1
+---
+{
+	"ItemBOMDesc": {
+		pack_no: payload.ns1#ItemBOMDesc.pack_no,
+		item: payload.ns1#ItemBOMDesc.item,
+		pack_qty: payload.ns1#ItemBOMDesc.pack_qty as Number
+	}
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<json:validate-schema doc:name="Validate schema" doc:id="20f7c0d2-7977-4b10-b8b3-5b9654ede379" schema="jsonschemas/ItemDesc.schema.json" />
+		<try doc:name="Try" doc:id="eb564571-b7dd-4c69-9fae-d178320ba2c9" >
+			<file:write doc:name="Write  ItemBOMCre" doc:id="ca856bd9-a087-4047-93f9-1bd26b6d6904" path="#[vars.vRequest ++ &quot;-&quot; ++ (now() as String {format:'dd-MM-yy'}) ++ '.json']" config-ref="File_Config"/>
+			<error-handler >
+				<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="32a31ef5-a928-4c7d-a3f9-5cf4ae40830a" type="ANY" >
+					<logger level="INFO" doc:name="Logger" doc:id="47ec05b7-9ad6-4e42-89ac-653d03bfdcd7" message='#["error logger of ItemBOMCre "]' />
+				</on-error-continue>
+			</error-handler>
+		</try>
+	</flow>
+	<flow name="sf-itemBOMMod" doc:id="50786d27-6596-4972-bbff-a0f1dab7836a" >
+		<logger level="INFO" doc:name="Logger" doc:id="cf4d92a3-28a9-45e2-87fa-1deb5ecd863b" message="start logger of ItemBOMMod" />
+		<ee:transform doc:name="Transform Message" doc:id="92a0ee08-3ffc-461f-b86e-e4f94f33c4ee" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+ns ns1 http://www.oracle.com/retail/integration/base/bo/ItemBOMDesc/v1
+---
+{
+	"ItemBOMDesc": {
+		pack_no: payload.ns1#ItemBOMDesc.pack_no,
+		item: payload.ns1#ItemBOMDesc.item,
+		pack_qty: payload.ns1#ItemBOMDesc.pack_qty as Number
+	}
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<json:validate-schema doc:name="Validate schema" doc:id="4a313335-20a4-4ae7-b1ab-47636daede55" schema="jsonschemas/ItemDesc.schema.json" />
+		<try doc:name="Try" doc:id="77917d27-53c5-4adf-a1b6-3838817e94a3" >
+			<file:write doc:name="Write  ItemBOMMod" doc:id="cbcb7249-6c5d-45eb-a0d5-e7cab87a4456" path="#[vars.vRequest ++ &quot;-&quot; ++ (now() as String {format:'dd-MM-yy'}) ++ '.json']" config-ref="File_Config"/>
+			<error-handler >
+				<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="64a9dc48-26dd-469d-b810-bdb0807465fd" type="ANY" >
+					<logger level="INFO" doc:name="Logger" doc:id="83bfbee8-118d-40bd-b3d9-c719eaea03c5" message='#["error logger of ItemBOMMod "]' />
+				</on-error-continue>
+			</error-handler>
+		</try>
+	</flow>
+	<flow name="sf-itemBOMDel" doc:id="5d386e41-98f4-4f9d-9173-7b07fe0585b9" >
+		<logger level="INFO" doc:name="Logger" doc:id="8b2bff3c-04a8-4a1a-adbe-b348150a9bc7" message="start logger of ItemBOMDel" />
+		<ee:transform doc:name="Transform Message" doc:id="15e6b8e1-ad6c-4a30-a7d8-ff5c3dee1cb2" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+ns ns1 http://www.oracle.com/retail/integration/base/bo/ItemBOMRef/v1
+---
+{
+	"ItemBOMRef": {
+		pack_no: payload.ns1#ItemBOMRef.pack_no,
+		item: payload.ns1#ItemBOMRef.item
+	}
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<json:validate-schema doc:name="Validate schema" doc:id="c1182e5a-e5f7-4b3f-93c5-5e61e325d2ba" schema="jsonschemas/ItemBOMRef.schema.json" />
+		<try doc:name="Try" doc:id="414fdc8f-c777-4ded-b420-41418ca56bdf" >
+			<file:write doc:name="Write  ItemBOMDel" doc:id="fd87aec6-1bac-4f59-b307-034dfad1fc7c" path="#[vars.vRequest ++ &quot;-&quot; ++ (now() as String {format:'dd-MM-yy'}) ++ '.json']" config-ref="File_Config"/>
+			<error-handler >
+				<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="f317cdce-ec7f-4686-abae-059272dcc629" type="ANY" >
+					<logger level="INFO" doc:name="Logger" doc:id="c2e068a7-b329-47bf-8375-d76cab2d2292" message='#["error logger of ItemBOMDel "]' />
+				</on-error-continue>
+			</error-handler>
+		</try>
+	</flow>
+	</mule>

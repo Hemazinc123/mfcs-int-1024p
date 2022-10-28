@@ -1,0 +1,6 @@
+<ItemSupRef
+	xmlns="http://www.oracle.com/retail/integration/base/bo/ItemSupRef/v1"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.oracle.com/retail/integration/base/bo/ItemSupRef/v1 http://www.oracle.com/retail/integration/base/bo/ItemSupRef/v1/ItemSupRef.xsd ">
+	<item>TiwoMqGvLofzgxuNHHJGfæ±</item>
+	<supplier>incuAvæ±</supplier>
+</ItemSupRef>

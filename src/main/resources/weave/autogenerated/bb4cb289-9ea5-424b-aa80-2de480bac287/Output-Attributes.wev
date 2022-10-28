@@ -1,0 +1,23 @@
+%dw 2.0
+
+type auto_bb4cb289_9ea5_424b_aa80_2de480bac287_Output_Attributes = {|
+  clientCertificate?: {|
+    publicKey?: {|  |}, 
+    "type"?: String, 
+    encoded?: Binary
+  |}, 
+  headers: {|  |}, 
+  listenerPath: String, 
+  method: String, 
+  queryParams: {|  |}, 
+  queryString: String, 
+  relativePath: String, 
+  remoteAddress: String, 
+  requestPath: String, 
+  requestUri: String, 
+  scheme: String, 
+  uriParams: {| baseURL: "esb-uat01.test.com" | "esb-qa01.test.com" | "esb-dev01.test.com" | "esb-prod01.com" |}, 
+  version: String, 
+  localAddress: String
+|}
+

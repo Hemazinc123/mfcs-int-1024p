@@ -1,0 +1,10 @@
+<ItemUPCDesc
+	xmlns="http://www.oracle.com/retail/integration/base/bo/ItemUPCDesc/v1"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.oracle.com/retail/integration/base/bo/ItemUPCDesc/v1 http://www.oracle.com/retail/integration/base/bo/ItemUPCDesc/v1/ItemUPCDesc.xsd ">
+	<item_id>WflhPhPDfkLOzUGNqmctlæ±</item_id>
+	<item_parent>WbxMdwlSGbzOPyGRIFYFSæ±</item_parent>
+	<primary_ref_item_ind>a</primary_ref_item_ind>
+	<format_id>a</format_id>
+	<prefix>2</prefix>
+	<item_number_type>aUæ±</item_number_type>
+</ItemUPCDesc>

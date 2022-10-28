@@ -1,0 +1,7 @@
+<ItemSupCtyMfrRef
+	xmlns="http://www.oracle.com/retail/integration/base/bo/ItemSupCtyMfrRef/v1"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.oracle.com/retail/integration/base/bo/ItemSupCtyMfrRef/v1 http://www.oracle.com/retail/integration/base/bo/ItemSupCtyMfrRef/v1/ItemSupCtyMfrRef.xsd ">
+	<item>mKAiRIcOEAgwnOQHyQueOæ±</item>
+	<supplier>10</supplier>
+	<manufacturer_ctry_id>a</manufacturer_ctry_id>
+</ItemSupCtyMfrRef>

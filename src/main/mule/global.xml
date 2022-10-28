@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit"
+	xmlns:api-gateway="http://www.mulesoft.org/schema/mule/api-gateway" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd 
+http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/api-gateway http://www.mulesoft.org/schema/mule/api-gateway/current/mule-api-gateway.xsd">
+	<configuration-properties doc:name="Configuration properties" doc:id="0809f40f-718f-482e-bfba-61f937d934e1" file="properties\Common.yaml" />
+	<api-gateway:autodiscovery apiId="18249331" ignoreBasePath="true" doc:name="API Autodiscovery" doc:id="08e3577d-9a04-462e-a77f-1009730ad65f" flowRef="api-main" />
+    <apikit:config name="mfcs-int-024p-config" api="mfcs-int-024p.raml" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus">
+		<apikit:flow-mappings >
+			<apikit:flow-mapping resource="/ISCDim" action="post" content-type="application/xml" flow-ref="mf-post-ISCDim" />
+			<apikit:flow-mapping resource="/ISCDim" action="patch" content-type="application/xml" flow-ref="mf-patch-ISCDim" />
+			<apikit:flow-mapping resource="/ISCDim" action="delete" content-type="application/xml" flow-ref="mf-delete-ISCDim" />
+			<apikit:flow-mapping resource="/ItemBOM" action="patch" content-type="application/xml" flow-ref="mf-patch-ItemBOM" />
+			<apikit:flow-mapping resource="/ItemBOM" action="delete" content-type="application/xml" flow-ref="mf-delete-ItemBOM" />
+			<apikit:flow-mapping resource="/ItemUDADate" action="post" content-type="application/xml" flow-ref="mf-post-ItemUDADate" />
+			<apikit:flow-mapping resource="/ItemUDADate" action="patch" content-type="application/xml" flow-ref="mf-patch-ItemUDADate" />
+			<apikit:flow-mapping resource="/ItemUDADate" action="delete" content-type="application/xml" flow-ref="mf-delete-ItemUDADate" />
+			<apikit:flow-mapping resource="/Item" action="post" content-type="application/xml" flow-ref="mf-post-Item" />
+			<apikit:flow-mapping resource="/ItemImage" action="post" content-type="application/xml" flow-ref="mf-post-ItemImage" />
+			<apikit:flow-mapping resource="/ItemImage" action="patch" content-type="application/xml" flow-ref="mf-patch-ItemImage" />
+			<apikit:flow-mapping resource="/ItemImage" action="delete" content-type="application/xml" flow-ref="mf-delete-ItemImage" />
+			<apikit:flow-mapping resource="/ItemUPC" action="post" content-type="application/xml" flow-ref="mf-post-ItemUPC" />
+			<apikit:flow-mapping resource="/ItemUPC" action="patch" content-type="application/xml" flow-ref="mf-patch-ItemUPC" />
+			<apikit:flow-mapping resource="/ItemUPC" action="delete" content-type="application/xml" flow-ref="mf-delete-ItemUPC" />
+			<apikit:flow-mapping resource="/ItemSup" action="post" content-type="application/xml" flow-ref="mf-post-ItemSup" />
+			<apikit:flow-mapping resource="/ItemSup" action="patch" content-type="application/xml" flow-ref="mf-patch-ItemSup" />
+			<apikit:flow-mapping resource="/ItemSup" action="delete" content-type="application/xml" flow-ref="mf-delete-ItemSup" />
+			<apikit:flow-mapping resource="/ItemHdr" action="patch" content-type="application/xml" flow-ref="mf-patch-ItemHdr" />
+			<apikit:flow-mapping resource="/ItemTckt" action="post" content-type="application/xml" flow-ref="mf-post-ItemTckt" />
+			<apikit:flow-mapping resource="/ItemUDAFF" action="post" content-type="application/xml" flow-ref="mf-post-ItemUDAFF" />
+			<apikit:flow-mapping resource="/ItemUDAFF" action="patch" content-type="application/xml" flow-ref="mf-patch-ItemUDAFF" />
+			<apikit:flow-mapping resource="/ItemUDAFF" action="delete" content-type="application/xml" flow-ref="mf-delete-ItemUDAFF" />
+			<apikit:flow-mapping resource="/iSCMfr" action="post" content-type="application/xml" flow-ref="mf-post-iSCMfr" />
+			<apikit:flow-mapping resource="/iSCMfr" action="patch" content-type="application/xml" flow-ref="mf-patch-iSCMfr" />
+			<apikit:flow-mapping resource="/iSCMfr" action="delete" content-type="application/xml" flow-ref="mf-delete-iSCMfr" />
+			<apikit:flow-mapping resource="/RelItemDet" action="post" content-type="application/xml" flow-ref="mf-post-RelItemDet" />
+			<apikit:flow-mapping resource="/RelItemDet" action="patch" content-type="application/xml" flow-ref="mf-patch-RelItemDet" />
+			<apikit:flow-mapping resource="/RelItemDet" action="delete" content-type="application/xml" flow-ref="mf-delete-RelItemDet" />
+			<apikit:flow-mapping resource="/ItemUDALOV" action="post" content-type="application/xml" flow-ref="mf-post-ItemUDALOV" />
+			<apikit:flow-mapping resource="/ItemUDALOV" action="patch" content-type="application/xml" flow-ref="mf-patch-ItemUDALOV" />
+			<apikit:flow-mapping resource="/ItemUDALOV" action="delete" content-type="application/xml" flow-ref="mf-delete-ItemUDALOV" />
+			<apikit:flow-mapping resource="/itemSupCty" action="post" content-type="application/xml" flow-ref="mf-post-itemSupCty" />
+			<apikit:flow-mapping resource="/itemSupCty" action="patch" content-type="application/xml" flow-ref="mf-patch-itemSupCty" />
+			<apikit:flow-mapping resource="/itemSupCty" action="delete" content-type="application/xml" flow-ref="mf-delete-itemSupCty" />
+			<apikit:flow-mapping resource="/RelltemHead" action="post" content-type="application/xml" flow-ref="mf-post-RelltemHead" />
+			<apikit:flow-mapping resource="/RelltemHead" action="delete" content-type="application/xml" flow-ref="mf-delete-RelltemHead" />
+			<apikit:flow-mapping resource="/Item" action="delete" content-type="application/xml" flow-ref="mf-delete-Item" />
+			<apikit:flow-mapping resource="/ItemBOM" action="post" content-type="application/xml" flow-ref="mf-post-ItemBOM" />
+		</apikit:flow-mappings>
+	</apikit:config>
+    <http:listener-config name="mfcs-int-024p-httpListenerConfig">
+        <http:listener-connection host="0.0.0.0" port="8081" />
+    </http:listener-config>
+</mule>
